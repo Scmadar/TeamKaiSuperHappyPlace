@@ -1,4 +1,4 @@
-package rs;
+package rps;
 
 /** 
  * Represents a match of Rock, Paper, Scissors.
