@@ -1,10 +1,10 @@
-package rockpaperscissors;
+package rs;
 
 /** 
  * Represents a match of Rock, Paper, Scissors.
  * A match consists of n rounds and the stats for those rounds.
  *
- * @author Team Kai (Kelvin Chan)
+ * @author Team Kai
  * @version 1.0
  */
 public class Match
