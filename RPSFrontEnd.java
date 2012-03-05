@@ -14,6 +14,7 @@ public class RPSFrontEnd
   static Player player1=new HumanPlayer();
   static Player player2=new ComputerPlayer();
   static Scanner in=new Scanner(System.in);
+  static Match current=null;
 
  /**
   * @param args the command line arguments
@@ -45,7 +46,7 @@ public class RPSFrontEnd
   */
  private static void startMatch()
    {int winner;
-    Match current=new Match(throwCount);
+    current=new Match(throwCount);
     while(!current.matchIsOver())
       {winner=0;
        int p1Throw=player1.getThrows();
@@ -97,18 +98,22 @@ public class RPSFrontEnd
           player1.incrementTies();
           player2.incrementTies();
          }
-       if(winner==-1)//p1 wins
+       else if(winner==-1)//p1 wins
          {printString("You won the round!\n");
           player1.incrementWins();
           player2.incrementLosses();
        }
-       if(winner==-2)
-         {printString("The computer won the round!");
+       else if(winner==1)
+         {printString("The computer won the round!\n");
           player1.incrementLosses();
           player2.incrementWins();
          }
+       else
+         {printString("Something went horribly wrong.");}
        
       }
+    displayScore();
+    current=null;
 
    }
  
@@ -138,7 +143,7 @@ public class RPSFrontEnd
        return -1;
       }
     if(parceMe.equals("4"))
-      {printString("Thanks for playing!");
+      {printString("Thanks for playing!\n\n");
        System.exit(0);
       }
     printString("Command not understood. Please try again.\n");
@@ -178,7 +183,7 @@ public class RPSFrontEnd
        return 3;
       }
     else if(parceMe.equalsIgnoreCase("quit"))
-      {printString("Goodbye!");
+      {printString("Goodbye!\n\n");
        System.exit(0);
       }
     return -1; //if it got past return an error
@@ -201,13 +206,42 @@ public class RPSFrontEnd
  * Displays a help message.
  */
  private static void displayHelp()
-   {printString("Not implemented yet!");
+   {printString("==========HELP PAGE==========\n");
+    printString("A match consists of one or more rounds.\n");
+    printString("To play a round, select either Rock, Paper, or Scissors.\n");
+    printString("The computer will choose one of the same choices at random.\n");
+    printString("The winner is determined as follows:\n");
+    printString("  -Rock crushes Scissors\n");
+    printString("  -Scissors cuts Paper\n");
+    printString("  -Paper covers Rock\n");
+    printString("The player with the most wins at the end of "
+            + "the round is the winner!\n\n");
    }
 
  /**
   * Displays the score. Gotten from the match most likely.
   */
  private static void displayScore()
-   {printString("Not implemented yet!");
+   {if(current!=null)//if current is null it's not inside a match, so don't
+                           //display the match-specific stats
+      {int[] temp=current.getStats();
+       printString("===Stats for the current match===\n");
+       printString("Player 1 wins: "+temp[0]+"\n");
+       printString("Player 2 wins: "+temp[1]+"\n");
+       printString("Ties: "+temp[2]+"\n\n");
+       printString("Current match progress: "+current.getThrowCount()
+                +" of "+throwCount+" throws completed.\n\n");
+      }
+    Stats temp=player1.getStats();
+    printString("===Player 1 stats===\n");
+    printString("Wins: "+temp.getWins()+"\n");
+    printString("Losses: "+temp.getLosses()+"\n");
+    printString("Ties: "+temp.getTies()+"\n\n");
+    
+    temp=player2.getStats();
+    printString("===Player 2 stats===\n");
+    printString("Wins: "+temp.getWins()+"\n");
+    printString("Losses: "+temp.getLosses()+"\n");
+    printString("Ties: "+temp.getTies()+"\n\n");
    }
 }
