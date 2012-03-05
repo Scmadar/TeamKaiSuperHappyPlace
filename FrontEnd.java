@@ -7,7 +7,7 @@ package RPS;
 
 /**
  *
- * @author Think
+ * @author Kai
  */
 
 import java.util.Scanner;
