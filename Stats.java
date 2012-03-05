@@ -57,7 +57,7 @@ public class Stats
      * This returns the number of losses that a player has.
      * @return the number of losses that a player has.
      */
-    public int losses()
+    public int getLosses()
     {
         return losses;
     }
