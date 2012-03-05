@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  *
- * @author Jason / Team Kai
+ * @author KAI
  */
 public class RPSFrontEnd
  {private static int throwCount;
