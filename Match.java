@@ -19,6 +19,8 @@ public class Match
      */
     private int[] stats;
     
+    
+    
     /**
      * Default Constructor for Match.
      * Initializes number of rounds to zero.
@@ -29,6 +31,8 @@ public class Match
         stats = new int[3];
         stats[0]=stats[1]=stats[2]=0;
     }
+    
+    
     
     /**
      * Constructor for Match specifying number of rounds.
@@ -41,6 +45,8 @@ public class Match
         stats = new int[3];
     }
     
+    
+    
     /**
      * Conducts one round of Rock, Paper, Scissors.
      * Determines winner of the round.
@@ -48,10 +54,16 @@ public class Match
      * 
      * @param   int Integer representation of Player 1's throw.
      * @param   int Integer representation of Player 2's throw.
-     * @return  int -1: P1 Wins, 0: Tie, 1: P2 Wins
+     * @return  int -1: P1 Wins, 0: Tie, 1: P2 Wins, -2:  Invalid Result
      */
     public int checkRound(int p1Throw, int p2Throw)
     {
+        // Check that both throws are valid
+        if(throwIsValid(p1Throw) && throwIsValid(p2Throw))
+        {
+            return -2;
+        }
+        
         // Decrement number of rounds by one
         throwCount --;
         
@@ -77,6 +89,8 @@ public class Match
         }
     }
     
+    
+    
     /**
      * Returns the current match's stats.
      * 
@@ -86,6 +100,8 @@ public class Match
     {
         return stats.clone();
     }
+    
+    
     
     /**
      * Returns the current match's remaining rounds.
@@ -97,6 +113,8 @@ public class Match
         return throwCount;
     }
     
+    
+    
     /**
      * Sets number of rounds to desired amount.
      * 
@@ -107,6 +125,8 @@ public class Match
         this.throwCount = throwCount;
     }
     
+    
+    
     /**
      * Returns whether the match is over.
      * 
@@ -116,5 +136,17 @@ public class Match
     {
         // Number of rounds remaining is zero or lower
         return (throwCount <= 0);
+    }
+    
+    
+    
+    /**
+     * Returns whether the throw is valid.
+     * 
+     * @return  boolean
+     */
+    private boolean throwIsValid(int currentThrow)
+    {
+        return currentThrow >= 0 && currentThrow <= 2;
     }
 }
