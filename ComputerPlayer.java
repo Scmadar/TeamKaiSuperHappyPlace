@@ -1,3 +1,5 @@
+package RPS;
+
 /**
  * A class that represents one player of the RPS game, this implements the abstract Player class.
  * @author KAI
@@ -6,9 +8,12 @@ import java.util.Random;
 
 
 public class ComputerPlayer extends Player
-{
-    Random Random=new Random();
-
+{Random Random=new Random();
+  
+  public ComputerPlayer()
+    {stats=new Stats();
+     
+    }
 
 
     /**
@@ -16,6 +21,7 @@ public class ComputerPlayer extends Player
      * another location or an error occurs.
      * @return the throw for this player or -1.
      */
+    @Override
     int getThrows()
     {
         int computerChoice=Random.nextInt(3);

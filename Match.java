@@ -1,4 +1,4 @@
-package rps;
+package RPS;
 
 /** 
  * Represents a match of Rock, Paper, Scissors.
@@ -27,6 +27,7 @@ public class Match
     {
         throwCount = 0;
         stats = new int[3];
+        stats[0]=stats[1]=stats[2]=0;
     }
     
     /**

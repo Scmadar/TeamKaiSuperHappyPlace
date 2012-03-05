@@ -1,6 +1,13 @@
+package RPS;
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
- * @author KAI
+ * @author Think
  */
 
 import java.util.Scanner;
@@ -13,9 +20,7 @@ public class FrontEnd {
          
         //int flag = 0;
         Scanner s = new Scanner(System.in);
-        /**
-         * Main menu of the program
-         */
+        
         System.out.println("*******************************");
         System.out.println("*   ROCK - PAPER - SCISSORS   *");
         System.out.println("*         Team KAI            *");
@@ -43,28 +48,18 @@ public class FrontEnd {
                 displayHelp();
             }
             else if (c == 4) {
-                //quit the program
                 System.out.println("Goodbye!");
                 System.exit(0);
             }
             else {
-                //invalid input
                 System.out.print("\nThe number is invalid. Please enter again.\n");
                 flag = 0;
             }
         } while (flag == 0);
     }
-    /**
-     * A method that returns score
-     * @return score
-     */
  //   private Stats displayScore() {
  //       return null;
  //   }
-    /**
-     * A method that prints the help message
-     * 
-     */
     private static void displayHelp() {
         System.out.println("\nHelp Message:");
         System.out.println("*The player enters his/her choice(rock/paper/scissors).");
@@ -76,4 +71,3 @@ public class FrontEnd {
         flag = 0;
     }
 }
-
