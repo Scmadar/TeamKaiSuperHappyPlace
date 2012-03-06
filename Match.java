@@ -59,7 +59,7 @@ public class Match
     public int checkRound(int p1Throw, int p2Throw)
     {
         // Check that both throws are valid
-        if(throwIsValid(p1Throw) && throwIsValid(p2Throw))
+        if(!throwIsValid(p1Throw) || !throwIsValid(p2Throw))
         {
             return -2;
         }
