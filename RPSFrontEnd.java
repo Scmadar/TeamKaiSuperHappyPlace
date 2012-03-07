@@ -26,6 +26,10 @@ public class RPSFrontEnd
       }
     else
       {throwCount=Integer.getInteger(args[2]).intValue();
+       if(throwCount<=0)
+         {printString("Invalid throw count. Set to default, 20\n");
+          throwCount=20;
+         }
       }
     printString("   ROCK - PAPER - SCISSORS   \n");
     printString("         Team KAI            \n");
