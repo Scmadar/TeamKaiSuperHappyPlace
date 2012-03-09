@@ -1,13 +1,12 @@
 package RPS;
-
 /**
- * A basic class that keeps track of a players score-related information 
+ * A basic class that keeps track of a players score-related information
  *        within a rock paper scissors game.
  * @author KAI
  */
 public class Stats
 {
-    private int wins,losses,ties=0; //various counters to keep track 
+    private int wins,losses,ties=0; //various counters to keep track
                 //of game record
 
 
