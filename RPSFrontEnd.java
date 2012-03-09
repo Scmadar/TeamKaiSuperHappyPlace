@@ -11,7 +11,6 @@ public class RPSFrontEnd
   static Player player2=new ComputerPlayer();
   static Scanner in=new Scanner(System.in);
   static Match current=null;
-  static Parser parser=new ParseCommandLine();
 
  /**
   * @param args the command line arguments
@@ -38,7 +37,7 @@ public class RPSFrontEnd
        printString("Enter 3 or 'score' to display score\n");
        printString("Enter 4 or 'quit' to quit the game\n");
        printString("Enter your choice: ");
-       command=parceMenuCommand(getCommand());
+       command = parceMenuCommand(in.nextLine());
       }
     }
 
@@ -52,10 +51,10 @@ public class RPSFrontEnd
     current=new Match(throwCount);
     while(!current.matchIsOver())
       {winner=0;
-       int p1Throw=player1.getThrows();
+      int p1Throw = -1;
        while(p1Throw==-1)
          {printString("Enter your throw: ");
-          p1Throw=parser.parceCommand(getCommand());
+         p1Throw =player1.getThrows();
           if(p1Throw==-1)
             {printString("Invalid command. Please enter rock, paper,"
                                 +" or scissors.\n");}
@@ -147,15 +146,6 @@ public class RPSFrontEnd
 
    }
 
-/**
- *
- * @return the String returned by the scanner. Later will be button presses.
- */
- private static String getCommand()
-   {
-     return in.nextLine();
-   }
-
 
 /**
  * This handles the initial menu command
@@ -179,7 +169,7 @@ public class RPSFrontEnd
        return -1;
       }
     if(parceMe.equals("4")|| parceMe.equalsIgnoreCase("quit"))
-      {printString("Thanks for playing!\n\n");
+      {printString("Thanks for playing! Goodbye!\n\n");
        System.exit(0);
       }
 
