@@ -1,6 +1,5 @@
 package RPS;
-
-/** 
+/**
  * Represents a match of Rock, Paper, Scissors.
  * A match consists of n rounds and the stats for those rounds.
  *
@@ -13,14 +12,14 @@ public class Match
      * Number of rounds left in the match
      */
     private int throwCount;
-    
+
     /**
      * [0]->P1 Wins, [1]->P2 Wins, [2]->Ties
      */
     private int[] stats;
-    
-    
-    
+
+
+
     /**
      * Default Constructor for Match.
      * Initializes number of rounds to zero.
@@ -31,12 +30,12 @@ public class Match
         stats = new int[3];
         stats[0]=stats[1]=stats[2]=0;
     }
-    
-    
-    
+
+
+
     /**
      * Constructor for Match specifying number of rounds.
-     * 
+     *
      * @param   int Number of rounds desired
      */
     public Match(int throwCount)
@@ -44,14 +43,14 @@ public class Match
         this.throwCount = throwCount;
         stats = new int[3];
     }
-    
-    
-    
+
+
+
     /**
      * Conducts one round of Rock, Paper, Scissors.
      * Determines winner of the round.
      * Decrements the number of rounds left by one.
-     * 
+     *
      * @param   int Integer representation of Player 1's throw.
      * @param   int Integer representation of Player 2's throw.
      * @return  int -1: P1 Wins, 0: Tie, 1: P2 Wins, -2:  Invalid Result
@@ -63,10 +62,10 @@ public class Match
         {
             return -2;
         }
-        
+
         // Decrement number of rounds by one
         throwCount --;
-        
+
         // Tie
         if(p1Throw == p2Throw)
         {
@@ -88,48 +87,48 @@ public class Match
             return 1;
         }
     }
-    
-    
-    
+
+
+
     /**
      * Returns the current match's stats.
-     * 
+     *
      * @return  int[]   [0]->P1 Wins, [1]->P2 Wins, [2]->Ties
      */
     public int[] getStats()
     {
         return stats.clone();
     }
-    
-    
-    
+
+
+
     /**
      * Returns the current match's remaining rounds.
-     * 
+     *
      * @return  int[]   [0]->P1 Wins, [1]->P2 Wins, [2]->Ties
      */
     public int getThrowCount()
     {
         return throwCount;
     }
-    
-    
-    
+
+
+
     /**
      * Sets number of rounds to desired amount.
-     * 
+     *
      * @param   int Number of rounds desired
      */
     public void setThrowCount(int throwCount)
     {
         this.throwCount = throwCount;
     }
-    
-    
-    
+
+
+
     /**
      * Returns whether the match is over.
-     * 
+     *
      * @return  boolean
      */
     public boolean matchIsOver()
@@ -137,12 +136,12 @@ public class Match
         // Number of rounds remaining is zero or lower
         return (throwCount <= 0);
     }
-    
-    
-    
+
+
+
     /**
      * Returns whether the throw is valid.
-     * 
+     *
      * @return  boolean
      */
     private boolean throwIsValid(int currentThrow)
