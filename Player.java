@@ -19,13 +19,19 @@ public abstract class Player
     }
 
     public void incrementWins()
-      {stats.incrementWins();}
+    {
+        stats.incrementWins();
+    }
 
     public void incrementLosses()
-      {stats.incrementLosses();}
+    {
+        stats.incrementLosses();
+    }
 
     public void incrementTies()
-      {stats.incrementTies();}
+    {
+        stats.incrementTies();
+    }
 
 
     /**

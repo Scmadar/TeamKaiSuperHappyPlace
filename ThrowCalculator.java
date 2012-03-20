@@ -6,5 +6,11 @@ package RPS;
  */
 public abstract class ThrowCalculator
 {
+    private String throwrec = "";
     abstract int calculatethrow();
+    
+    void matchRec(String str)
+    {
+        throwrec += str;
+    }
 }

@@ -10,8 +10,9 @@ public class HumanPlayer extends Player
 {
     Scanner in=new Scanner(System.in);
     Parser parser = new ParseCommandLine();
-  public HumanPlayer()
-    {stats=new Stats();
+    public HumanPlayer()
+    {
+        stats=new Stats();
     }
 
     /**
@@ -26,7 +27,7 @@ public class HumanPlayer extends Player
     }
 
      private String getCommand()
-   {
-     return in.nextLine();
-   }
+    {
+        return in.nextLine();
+    }
 }

@@ -8,9 +8,9 @@ public class ComputerPlayer extends Player
 {
     ThrowCalculator throwcalc=new RandomThrow();
 
-  public ComputerPlayer()
-    {stats=new Stats();
-
+    public ComputerPlayer()
+    {
+        stats=new Stats();
     }
   
     /**
@@ -22,5 +22,9 @@ public class ComputerPlayer extends Player
     {
         return throwcalc.calculatethrow();
     }
-
+    
+    void setMatchRec(String str) 
+    {
+        throwcal.matchRec(str);
+    }
 }

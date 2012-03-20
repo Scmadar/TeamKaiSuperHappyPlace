@@ -16,14 +16,18 @@ public class RPSFrontEnd
   * @param args the command line arguments
   */
  public static void main(String[] args)
-   {if(args.length<2||null==Integer.getInteger(args[1]))
-      {printString("No throw count found. Set to default, 20.\n");
+   {
+       if(args.length<2||null==Integer.getInteger(args[1]))
+      {
+          printString("No throw count found. Set to default, 20.\n");
        throwCount=20;
       }
     else
-      {throwCount=Integer.getInteger(args[2]).intValue();
+      {
+          throwCount=Integer.getInteger(args[2]).intValue();
        if(throwCount<=0)
-         {printString("Invalid throw count. Set to default, 20\n");
+         {
+             printString("Invalid throw count. Set to default, 20\n");
           throwCount=20;
          }
       }
@@ -31,13 +35,14 @@ public class RPSFrontEnd
     printString("         Team KAI            \n");
     int command=-1;
     while(command==-1)
-      {printString("\n\t MAIN MENU\n");
-       printString("Enter 1 or 'match' to start a match\n");
-       printString("Enter 2 or 'help' display help\n");
-       printString("Enter 3 or 'score' to display score\n");
-       printString("Enter 4 or 'quit' to quit the game\n");
-       printString("Enter your choice: ");
-       command = parceMenuCommand(in.nextLine());
+      {
+          printString("\n\t MAIN MENU\n");
+          printString("Enter 1 or 'match' to start a match\n");
+          printString("Enter 2 or 'help' display help\n");
+          printString("Enter 3 or 'score' to display score\n");
+          printString("Enter 4 or 'quit' to quit the game\n");
+          printString("Enter your choice: ");
+          command = parceMenuCommand(in.nextLine());
       }
     }
 
@@ -50,14 +55,18 @@ public class RPSFrontEnd
     int winner;
     current=new Match(throwCount);
     while(!current.matchIsOver())
-      {winner=0;
-      int p1Throw = -1;
-       while(p1Throw==-1)
-         {printString("Enter your throw: ");
-         p1Throw =player1.getThrows();
+      {
+          winner=0;
+          int p1Throw = -1;
+          while(p1Throw==-1)
+          {
+                printString("Enter your throw: ");
+          p1Throw =player1.getThrows();
           if(p1Throw==-1)
-            {printString("Invalid command. Please enter rock, paper,"
-                                +" or scissors.\n");}
+          {
+                printString("Invalid command. Please enter rock, paper,"
+                                +" or scissors.\n");
+          }
           if(p1Throw==3)
           {
                   displayHelp();
@@ -77,13 +86,14 @@ public class RPSFrontEnd
          }
        printString("You chose ");
        switch (p1Throw)
-         {case 0: printString("Rock\n");
+         {
+           case 0: printString("Rock\n");
               break;
-          case 1: printString("Paper\n");
+           case 1: printString("Paper\n");
               break;
-          case 2: printString("Scissors\n");
+           case 2: printString("Scissors\n");
               break;
-          default: printString("This should be impossibble.\n");
+           default: printString("This should be impossibble.\n");
          }
 
 
@@ -112,33 +122,38 @@ public class RPSFrontEnd
        
        printString("The computer chose ");
        switch (p2Throw)
-         {case 0: printString("Rock\n");
+         {
+           case 0: printString("Rock\n");
               break;
-          case 1: printString("Paper\n");
+           case 1: printString("Paper\n");
               break;
-          case 2: printString("Scissors\n");
+           case 2: printString("Scissors\n");
               break;
-          default: printString("This should be impossibble.\n");
+           default: printString("This should be impossibble.\n");
          }
 
        winner=current.checkRound(p1Throw, p2Throw);
        if(winner==0)//tie
-         {printString("The round ended in a tie!\n");
+         {
+           printString("The round ended in a tie!\n");
           player1.incrementTies();
          // player2.incrementTies();
          }
        else if(winner==-1)//p1 wins
-         {printString("You won the round!\n");
+         {
+           printString("You won the round!\n");
           player1.incrementWins();
           //player2.incrementLosses();
        }
        else if(winner==1)
-         {printString("The computer won the round!\n");
+         {
+             printString("The computer won the round!\n");
           player1.incrementLosses();
           //player2.incrementWins();
          }
        else
-         {printString("Something went horribly wrong.");}
+         {
+             printString("Something went horribly wrong.");}
 
       }
     displayScore();
@@ -155,22 +170,28 @@ public class RPSFrontEnd
  private static int parceMenuCommand(String parceMe)
    {
      if(parceMe==null)
-      {return -1;}
+      {
+          return -1;
+      }
     if(parceMe.equals("1")|| parceMe.equalsIgnoreCase("match"))
-      {startMatch();
-       return -1;
+      {
+          startMatch();
+          return -1;
       }
     if(parceMe.equals("2")|| parceMe.equalsIgnoreCase("help"))
-      {displayHelp();
-       return -1;
+      {
+          displayHelp();
+          return -1;
       }
     if(parceMe.equals("3")|| parceMe.equalsIgnoreCase("score"))
-      {displayScore();
-       return -1;
+      {
+          displayScore();
+          return -1;
       }
     if(parceMe.equals("4")|| parceMe.equalsIgnoreCase("quit"))
-      {printString("Thanks for playing! Goodbye!\n\n");
-       System.exit(0);
+      {
+          printString("Thanks for playing! Goodbye!\n\n");
+          System.exit(0);
       }
 
     printString("Command not understood. Please try again.\n");
@@ -184,25 +205,29 @@ public class RPSFrontEnd
  * @return true if non-null String was passed, false otherwise.
  */
  private static boolean printString(String printMe)
-   {if(printMe==null)
-      {return false;}
-    System.out.print(printMe);
-    return true;
+   {
+       if(printMe==null)
+      {
+          return false;
+      }
+        System.out.print(printMe);
+        return true;
    }
 
 /**
  * Displays a help message.
  */
  private static void displayHelp()
-   {printString("==========HELP PAGE==========\n");
-    printString("A match consists of one or more rounds.\n");
-    printString("To play a round, select either Rock, Paper, or Scissors.\n");
-    printString("The computer will choose one of the same choices at random.\n");
-    printString("The winner is determined as follows:\n");
-    printString("  -Rock crushes Scissors\n");
-    printString("  -Scissors cuts Paper\n");
-    printString("  -Paper covers Rock\n");
-    printString("The player with the most wins at the end of "
+   {
+       printString("==========HELP PAGE==========\n");
+       printString("A match consists of one or more rounds.\n");
+       printString("To play a round, select either Rock, Paper, or Scissors.\n");
+       printString("The computer will choose one of the same choices at random.\n");
+       printString("The winner is determined as follows:\n");
+       printString("  -Rock crushes Scissors\n");
+       printString("  -Scissors cuts Paper\n");
+       printString("  -Paper covers Rock\n");
+       printString("The player with the most wins at the end of "
             + "the round is the winner!\n\n");
    }
 
@@ -210,14 +235,16 @@ public class RPSFrontEnd
   * Displays the score. Gotten from the match most likely.
   */
  private static void displayScore()
-   {if(current!=null)//if current is null it's not inside a match, so don't
+   {
+     if(current!=null)//if current is null it's not inside a match, so don't
                            //display the match-specific stats
-      {int[] temp=current.getStats();
-       printString("===Stats for the current match===\n");
-       printString("Player 1 wins: "+temp[0]+"\n");
-       printString("Player 2 wins: "+temp[1]+"\n");
-       printString("Ties: "+temp[2]+"\n\n");
-       printString("Current match progress: "+current.getThrowCount()
+      {
+           int[] temp=current.getStats();
+           printString("===Stats for the current match===\n");
+           printString("Player 1 wins: "+temp[0]+"\n");
+           printString("Computer wins: "+temp[1]+"\n");
+           printString("Ties: "+temp[2]+"\n\n");
+           printString("Current match progress: "+current.getThrowCount()
                 +" of "+throwCount+" throws left.\n\n");
       }
     Stats temp=player1.getStats();
@@ -235,4 +262,13 @@ public class RPSFrontEnd
      *
      */
    }
+ private void throwStore(Queue t, ComputerPlayer p) 
+ {
+     String temp = "";
+     while (t.peek() != null)
+     {
+         temp += t.poll();
+     }
+     
+ }
 }
