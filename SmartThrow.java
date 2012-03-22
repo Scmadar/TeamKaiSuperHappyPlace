@@ -9,6 +9,10 @@ public class SmartThrow extends ThrowCalculator
     private HashMap throwrecord = new HashMap();
     private int n;
     private String recentthrows;
+    /**
+     * Method to calculate computer throw using smart algorithm
+     * @Return computer throw
+     */
     @Override
     public int calculatethrow() 
     {

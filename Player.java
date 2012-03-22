@@ -32,7 +32,9 @@ public abstract class Player
     {
         stats.incrementTies();
     }
-
+    
+    void setMatchRec(String str)
+    {}
 
     /**
      * A method that returns a players throw, or choice of move for a round.

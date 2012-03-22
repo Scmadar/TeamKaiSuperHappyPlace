@@ -6,5 +6,5 @@ package RPS;
  */
 public class MatchRecord 
 {
-    
+   
 }

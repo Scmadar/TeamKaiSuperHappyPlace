@@ -9,6 +9,10 @@ public class RandomThrow extends ThrowCalculator
 
      Random random=new Random();
 
+     /**
+      * Method to calculate computer throw by random
+      * @Return computer throw
+      */
     @Override
     int calculatethrow()
     {

@@ -23,8 +23,9 @@ public class ComputerPlayer extends Player
         return throwcalc.calculatethrow();
     }
     
+    @Override
     void setMatchRec(String str) 
     {
-        throwcal.matchRec(str);
+        throwcalc.matchRec(str);
     }
 }

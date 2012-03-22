@@ -56,6 +56,7 @@ public class RPSFrontEnd
     current=new Match(throwCount);
     while(!current.matchIsOver())
       {
+          String results="";
           winner=0;
           int p1Throw = -1;
           while(p1Throw==-1)
@@ -88,12 +89,16 @@ public class RPSFrontEnd
        switch (p1Throw)
          {
            case 0: printString("Rock\n");
+              results=results+"R";
               break;
            case 1: printString("Paper\n");
+              results=results+"P";
               break;
            case 2: printString("Scissors\n");
+              results=results="S";
               break;
            default: printString("This should be impossibble.\n");
+              results=results+"?";
          }
 
 
@@ -124,12 +129,16 @@ public class RPSFrontEnd
        switch (p2Throw)
          {
            case 0: printString("Rock\n");
+              results=results+"R";
               break;
            case 1: printString("Paper\n");
+              results=results+"P";
               break;
            case 2: printString("Scissors\n");
+              results=results="S";
               break;
            default: printString("This should be impossibble.\n");
+              results=results+"?";
          }
 
        winner=current.checkRound(p1Throw, p2Throw);
@@ -154,7 +163,9 @@ public class RPSFrontEnd
        else
          {
              printString("Something went horribly wrong.");}
-
+       
+       player1.setMatchRec(results);
+       player2.setMatchRec(results);
       }
     displayScore();
     current=null;
