@@ -125,20 +125,21 @@ public class RPSFrontEnd
               System.exit(0);
          }*/
        
+       
        printString("The computer chose ");
        switch (p2Throw)
          {
            case 0: printString("Rock\n");
-              results=results+"R";
+              results="R"+results;
               break;
            case 1: printString("Paper\n");
-              results=results+"P";
+              results="P"+results;
               break;
            case 2: printString("Scissors\n");
-              results=results="S";
+              results="S"+results;
               break;
            default: printString("This should be impossibble.\n");
-              results=results+"?";
+              results="?"+results;
          }
 
        winner=current.checkRound(p1Throw, p2Throw);
@@ -164,8 +165,9 @@ public class RPSFrontEnd
          {
              printString("Something went horribly wrong.");}
        
-       player1.setMatchRec(results);
-       player2.setMatchRec(results);
+       player1.setMatchRec(results); //This may be an issue when trying to put
+       player2.setMatchRec(results);  //two cpu's against each other, since 
+             //the order of throws matters (p1's comes after p2's currently).
       }
     displayScore();
     current=null;
