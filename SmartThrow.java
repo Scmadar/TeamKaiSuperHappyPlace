@@ -10,6 +10,14 @@ public class SmartThrow extends ThrowCalculator
     private int n;
     private String throwRecord;
     private Random rng=new Random();
+    
+    /**
+     * Constructor, initializes throwRecord to zero. Should work.
+     */
+    public SmartThrow()
+      {throwRecord="";}
+    
+    
     /**
      * Method to calculate computer throw using smart algorithm
      * @Return computer throw
@@ -50,6 +58,8 @@ public class SmartThrow extends ThrowCalculator
     
     private int[] splitAndWeight(int n)
       {int[] results={0,0,0};
+       if(throwRecord.length()<n)
+         {return results;}
        for(int i=0;i<3;i++)
          {String theEnd=throwRecord.substring(throwRecord.length()+1-n,
                                   throwRecord.length());

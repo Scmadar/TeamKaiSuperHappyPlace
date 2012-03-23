@@ -6,7 +6,7 @@ package RPS;
 
 public class ComputerPlayer extends Player
 {
-    ThrowCalculator throwcalc=new RandomThrow();
+    ThrowCalculator throwcalc=new SmartThrow();
 
     public ComputerPlayer()
     {
@@ -20,7 +20,11 @@ public class ComputerPlayer extends Player
     @Override
     int getThrows()
     {
-        return throwcalc.calculatethrow();
+        int choice=throwcalc.calculatethrow();
+        choice++;
+        if(choice==3)
+          {choice=0;}
+        return choice;
     }
     
     @Override
