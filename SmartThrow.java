@@ -45,10 +45,10 @@ public class SmartThrow extends ThrowCalculator
        if(results[indexOfMax]!=max)
          {indexOfMax=2;}
        for(int i=0;i<results.length;i++)  //There's probably a cleaner way to
-         {if(results[i]==max&&i!=indexOfMax)   //do all this
+         {if(results[i]==max&&i!=indexOfMax)   //do this
            {int temp=rng.nextInt(2); //0-1 inclusive
-            if(temp==indexOfMax)
-              {return max;}
+            if(temp==0)
+              {return indexOfMax;}
             else
               {return i;}
            }
