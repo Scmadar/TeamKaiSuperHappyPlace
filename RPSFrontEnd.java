@@ -6,103 +6,104 @@ import java.util.*;
  * @author KAI
  */
 public class RPSFrontEnd
- {private static int throwCount;
-  static Player player1=new HumanPlayer();
-  static Player player2=new ComputerPlayer();
-  static Scanner in=new Scanner(System.in);
-  static Match current=null;
-
+ {
+    private static int throwCount;
+    static Player player1=new HumanPlayer();
+    static Player player2=new ComputerPlayer();
+    static Scanner in=new Scanner(System.in);
+    static Match current=null;
+  
  /**
   * @param args the command line arguments
   */
  public static void main(String[] args)
    {
+       //get throw count from the command line argument
        if(args.length<2||null==Integer.getInteger(args[1]))
-      {
-          printString("No throw count found. Set to default, 20.\n");
-       throwCount=20;
-      }
-    else
-      {
-          throwCount=Integer.getInteger(args[2]).intValue();
-       if(throwCount<=0)
-         {
-             printString("Invalid throw count. Set to default, 20\n");
-          throwCount=20;
-         }
-      }
-    printString("   ROCK - PAPER - SCISSORS   \n");
-    printString("         Team KAI            \n");
-    int command=-1;
-    while(command==-1)
-      {
-          printString("\n\t MAIN MENU\n");
-          printString("Enter 1 or 'match' to start a match\n");
-          printString("Enter 2 or 'help' display help\n");
-          printString("Enter 3 or 'score' to display score\n");
-          printString("Enter 4 or 'quit' to quit the game\n");
-          printString("Enter your choice: ");
-          command = parceMenuCommand(in.nextLine());
-      }
-    }
+       {
+           printString("No throw count found. Set to default, 20.\n");
+           throwCount=20;
+       }
+       else
+       {
+           throwCount=Integer.getInteger(args[2]).intValue();
+           if(throwCount<=0)
+           {
+               printString("Invalid throw count. Set to default, 20\n");
+               throwCount=20;
+           }
+       }    
+       
+       printString("   ROCK - PAPER - SCISSORS   \n");
+       printString("         Team KAI            \n");
+       int command=-1;
+       while(command==-1)
+       {
+           printString("\n\t MAIN MENU\n");
+           printString("Enter 1 or 'match' to start a match\n");
+           printString("Enter 2 or 'help' display help\n");
+           printString("Enter 3 or 'score' to display score\n");
+           printString("Enter 4 or 'quit' to quit the game\n");
+           printString("Enter your choice: ");
+           command = parceMenuCommand(in.nextLine());
+       }
+   }
 
 
  /**
   * Begins a match.
   */
  private static void startMatch()
-   {
-    int winner;
-    current=new Match(throwCount);
-    while(!current.matchIsOver())
-      {
-          String results="";
-          winner=0;
-          int p1Throw = -1;
-          while(p1Throw==-1)
-          {               
-                printString("Enter your throw: ");
-          p1Throw =player1.getThrows();
-          if(p1Throw==-1)
-          {
-                printString("Invalid command. Please enter rock, paper,"
+ {
+     int winner;
+     current=new Match(throwCount);
+     while(!current.matchIsOver())
+     {
+         String results="";
+         winner=0;
+         int p1Throw = -1;
+         while(p1Throw==-1)
+         {               
+             printString("Enter your throw: ");
+             p1Throw =player1.getThrows();
+             if(p1Throw==-1)
+             {
+                 printString("Invalid command. Please enter rock, paper,"
                                 +" or scissors.\n");
-          }
-          if(p1Throw==3)
-          {
-                  displayHelp();
-                  p1Throw = -1;
-          }
-          if(p1Throw==4)
-          {
-              displayScore();
-              p1Throw = -1;
-          }
-          if(p1Throw==5)
-          {
-              printString("Goodbye!\n");
-              System.exit(0);
-          }
-              
+             }
+             if(p1Throw==3)
+             {
+                 displayHelp();
+                 p1Throw = -1;
+             }
+             if(p1Throw==4)
+             {
+                 displayScore();
+                 p1Throw = -1;
+             }
+             if(p1Throw==5)
+             {
+                 printString("Goodbye!\n");
+                 System.exit(0);
+             }
          }
-       printString("You chose ");
-       switch (p1Throw)
+         printString("You chose ");
+         switch (p1Throw)
          {
-           case 0: printString("Rock\n");
-              results=results+"R";
-              break;
-           case 1: printString("Paper\n");
-              results=results+"P";
-              break;
-           case 2: printString("Scissors\n");
-              results=results="S";
-              break;
-           default: printString("This should be impossibble.\n");
-              results=results+"?";
+             case 0: printString("Rock\n");
+                results=results+"R";
+                break;
+             case 1: printString("Paper\n");
+                results=results+"P";
+                break;
+             case 2: printString("Scissors\n");
+                results=results="S";
+                break;
+             default: printString("This should be impossibble.\n");
+                results=results+"?";
          }
 
-
-       int p2Throw=player2.getThrows();
+         int p2Throw=player2.getThrows();
        
        // This code is for 2 players
        /*while(p2Throw==-1)
@@ -126,52 +127,51 @@ public class RPSFrontEnd
          }*/
        
        
-       printString("The computer chose ");
-       switch (p2Throw)
+         printString("The computer chose ");
+         switch (p2Throw)
          {
-           case 0: printString("Rock\n");
-              results="R"+results;
-              break;
-           case 1: printString("Paper\n");
-              results="P"+results;
-              break;
-           case 2: printString("Scissors\n");
-              results="S"+results;
-              break;
-           default: printString("This should be impossibble.\n");
-              results="?"+results;
+             case 0: printString("Rock\n");
+                results="R"+results;
+                break;
+             case 1: printString("Paper\n");
+                results="P"+results;
+                break;
+             case 2: printString("Scissors\n");
+                results="S"+results;
+                break;
+             default: printString("This should be impossibble.\n");
+                results="?"+results;
          }
 
-       winner=current.checkRound(p1Throw, p2Throw);
-       if(winner==0)//tie
+         winner=current.checkRound(p1Throw, p2Throw);
+         if(winner==0)//tie
          {
-           printString("The round ended in a tie!\n");
-          player1.incrementTies();
-         // player2.incrementTies();
+             printString("The round ended in a tie!\n");
+             player1.incrementTies();
+             // player2.incrementTies();
          }
-       else if(winner==-1)//p1 wins
+         else if(winner==-1)//p1 wins
          {
-           printString("You won the round!\n");
-          player1.incrementWins();
-          //player2.incrementLosses();
-       }
-       else if(winner==1)
+             printString("You won the round!\n");
+             player1.incrementWins();
+             //player2.incrementLosses();
+         }
+         else if(winner==1)
          {
              printString("The computer won the round!\n");
-          player1.incrementLosses();
-          //player2.incrementWins();
+             player1.incrementLosses();
+             //player2.incrementWins();
          }
-       else
+         else
          {
              printString("Something went horribly wrong.");}
        
-       player1.setMatchRec(results); //This may be an issue when trying to put
-       player2.setMatchRec(results);  //two cpu's against each other, since 
+         player1.setMatchRec(results); //This may be an issue when trying to put
+         player2.setMatchRec(results);  //two cpu's against each other, since 
              //the order of throws matters (p1's comes after p2's currently).
-      }
-    displayScore();
-    current=null;
-
+     }
+     displayScore();
+     current=null;
    }
 
 
@@ -191,7 +191,12 @@ public class RPSFrontEnd
           printString("Set AI level (random or smart):");
           Scanner sc = new Scanner(System.in);
           String level = sc.nextLine();
-          ((ComputerPlayer) player2).setAI(level);
+          if (player2 instanceof ComputerPlayer)
+              ((ComputerPlayer) player2).setAI(level);
+          /* input throwCount
+          printString("Enter the number of throws per match: ");
+          throwCount = sc.nextInt();
+          */
           startMatch();
           return -1;
       }
