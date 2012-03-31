@@ -6,13 +6,23 @@ package RPS;
 
 public class ComputerPlayer extends Player
 {
-    ThrowCalculator throwcalc=new SmartThrow();
-
+    ThrowCalculator throwcalc;
+    
+    
     public ComputerPlayer()
     {
         stats=new Stats();
     }
-  
+    /**
+     * Set the AI level
+     * @param level AI level, either random or smart
+     */
+    
+    public void setAI(String level)
+    {
+        throwcalc = ThrowCalculator.makeCalculator(level);
+    }
+    
     /**
      * This returns the throw for computer player
      * @return the throw for computer

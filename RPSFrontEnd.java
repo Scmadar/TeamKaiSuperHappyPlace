@@ -60,7 +60,7 @@ public class RPSFrontEnd
           winner=0;
           int p1Throw = -1;
           while(p1Throw==-1)
-          {
+          {               
                 printString("Enter your throw: ");
           p1Throw =player1.getThrows();
           if(p1Throw==-1)
@@ -188,6 +188,10 @@ public class RPSFrontEnd
       }
     if(parceMe.equals("1")|| parceMe.equalsIgnoreCase("match"))
       {
+          printString("Set AI level (random or smart):");
+          Scanner sc = new Scanner(System.in);
+          String level = sc.nextLine();
+          ((ComputerPlayer) player2).setAI(level);
           startMatch();
           return -1;
       }
