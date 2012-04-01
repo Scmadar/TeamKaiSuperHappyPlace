@@ -188,14 +188,27 @@ public class RPSFrontEnd
       }
     if(parceMe.equals("1")|| parceMe.equalsIgnoreCase("match"))
       {
-          printString("Set AI level (random or smart):");
+          printString("Set AI level (1-random 2-smart):");
           Scanner sc = new Scanner(System.in);
           String level = sc.nextLine();
           if (player2 instanceof ComputerPlayer)
               ((ComputerPlayer) player2).setAI(level);
-          /* input throwCount
+          /*input throwCount
           printString("Enter the number of throws per match: ");
-          throwCount = sc.nextInt();
+          try 
+          {
+              throwCount = Integer.parseInt(sc.nextLine());
+              if(throwCount<=0 || (int) throwCount != throwCount)
+              {
+                  printString("Invalid throw count. Set to default, 20\n");
+                  throwCount=20;
+              }
+          }
+          catch(NumberFormatException nFE)
+          {
+              printString("Invalid throw count. Set to default, 20\n");
+              throwCount=20;
+          }
           */
           startMatch();
           return -1;

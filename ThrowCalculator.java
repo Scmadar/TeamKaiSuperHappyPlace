@@ -14,10 +14,21 @@ public abstract class ThrowCalculator
      */
     public static ThrowCalculator makeCalculator(String level) 
     {
-        if (level.equalsIgnoreCase("random"))
+        if (Integer.parseInt(level) == 1)
+        {
+            System.out.println("\nAI Level 1 (Random).");
             return new RandomThrow();
-        else if (level.equalsIgnoreCase("smart"))
+        }           
+        else if (Integer.parseInt(level) == 2)
+        {
+            System.out.println("\nAI Level 2 (Smart).");
             return new SmartThrow();
+        }
+        else
+        {
+            System.out.println("Invalid input. AI level is set to default.");
+            System.out.println("\nAI Level 1 (Random).");
+        }
         //default is random
         return new RandomThrow();
     }
