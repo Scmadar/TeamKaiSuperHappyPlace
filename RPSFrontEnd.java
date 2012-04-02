@@ -22,7 +22,6 @@ public class RPSFrontEnd
        //get throw count from the command line argument
        if(null==Integer.decode(args[index]))
        {
-           System.out.println(args.length); //debugging statement
            printString("No throw count found. Set to default, 20.\n");
            throwCount=20;
        }

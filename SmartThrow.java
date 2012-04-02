@@ -12,7 +12,7 @@ public class SmartThrow extends ThrowCalculator
     private Random rng=new Random();
     
     /**
-     * Constructor, initializes throwRecord to zero. Should work.
+     * Constructor, initializes throwRecord to the empty string.
      */
     public SmartThrow()
       {throwRecord="";}
@@ -55,8 +55,8 @@ public class SmartThrow extends ThrowCalculator
               indexOfMax=2;
           }
           for(int i=0;i<results.length;i++)  //There's probably a cleaner way to
-          {
-              if(results[i]==max&&i!=indexOfMax)   //do this
+          {                                         //do this
+              if(results[i]==max&&i!=indexOfMax)
               {
                   int temp=rng.nextInt(2); //0-1 inclusive
                   if(temp==0)
@@ -71,7 +71,9 @@ public class SmartThrow extends ThrowCalculator
          }
           return indexOfMax;
       }
-    
+    ///I'm not convinced this is working properly, in a 30 round match I got
+       /// a score of 11/15/4 W/L/T, while spamming rock. Perhaps it just isn't
+       /// too smart after all, but still... I'll debug it later.
     private int[] splitAndWeight(int n)
     {
         int[] results={0,0,0};
@@ -100,12 +102,15 @@ public class SmartThrow extends ThrowCalculator
             {
                 bionicImmortalZombieMonkeys=throwRecord.indexOf(theEnd,
                          bionicImmortalZombieMonkeys);
+                //finds the index of the next match. ^^
                 if(bionicImmortalZombieMonkeys%2==n%2) ///check this
-                {
+                {//if bizm is the same... even/odd-ness as n, the result should
+                  // be that the last char in the matched string has an odd
+                  // index, meaning it was the other player's choice.
                     results[i]++;
                     bionicImmortalZombieMonkeys+=2;
                 }
-                else
+                else //if they aren't the same, skip it and go on to the next.
                 {
                     bionicImmortalZombieMonkeys++;
                 }
