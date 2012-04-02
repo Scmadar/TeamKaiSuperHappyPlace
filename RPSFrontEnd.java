@@ -97,7 +97,7 @@ public class RPSFrontEnd
                 results=results+"P";
                 break;
              case 2: printString("Scissors\n");
-                results=results="S";
+                results=results+"S";
                 break;
              default: printString("This should be impossibble.\n");
                 results=results+"?";
