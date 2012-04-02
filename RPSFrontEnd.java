@@ -18,15 +18,17 @@ public class RPSFrontEnd
   */
  public static void main(String[] args)
    {
+       int index=args.length-1;
        //get throw count from the command line argument
-       if(args.length<2||null==Integer.getInteger(args[1]))
+       if(null==Integer.decode(args[index]))
        {
+           System.out.println(args.length); //debugging statement
            printString("No throw count found. Set to default, 20.\n");
            throwCount=20;
        }
        else
        {
-           throwCount=Integer.getInteger(args[2]).intValue();
+           throwCount=Integer.decode(args[index]).intValue();
            if(throwCount<=0)
            {
                printString("Invalid throw count. Set to default, 20\n");
