@@ -8,7 +8,6 @@ public class ComputerPlayer extends Player
 {
     ThrowCalculator throwcalc;
     
-    
     public ComputerPlayer()
     {
         stats=new Stats();
@@ -19,6 +18,11 @@ public class ComputerPlayer extends Player
      */
     
     public void setAI(String level)
+    {
+        throwcalc = ThrowCalculator.makeCalculator(Integer.parseInt(level));
+    }
+    
+    public void setAI(int level)
     {
         throwcalc = ThrowCalculator.makeCalculator(level);
     }
