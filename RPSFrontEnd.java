@@ -7,11 +7,13 @@ import java.util.*;
  */
 public class RPSFrontEnd
  {
+    private static final int defaultThrowCount=50;
     private static int throwCount;
     static Player player1=new HumanPlayer();
     static Player player2=new ComputerPlayer();
     static Scanner in=new Scanner(System.in);
     static Match current=null;
+    private static int aiType=0;
   
  /**
   * @param args the command line arguments
@@ -19,22 +21,81 @@ public class RPSFrontEnd
  public static void main(String[] args)
    {
        int index=args.length-1;
-       //get throw count from the command line argument
-       if(null==Integer.decode(args[index]))
+       //get throw count and ai level from the command line argument
+       //ai level is the last argument, throw count is the second to last.
+       //throw count is assumed before ai level, if there is only one arg
+       //throw count will be it, not ai level. The exception is if you enter
+       //a zero or one as the sole argument, it will assume you meant the
+       //ai level (currently, subject to changes)
+
+       if(index<0)
        {
-           printString("No throw count found. Set to default, 20.\n");
-           throwCount=20;
+           printString("No throw count found. Set to default, "+
+                                   defaultThrowCount+".\n");
+           throwCount=defaultThrowCount;
+           printString("No AI type selected, default set to random.\n");
+           aiType=0;
+           ((ComputerPlayer) player2).setAI(aiType);
        }
+       else if (index==0)
+       {
+           throwCount=Integer.decode(args[0]).intValue();
+           if(throwCount<=2)
+           {
+               printString("Invalid throw count. Set to default, "
+                                          +defaultThrowCount+"\n");
+               throwCount=defaultThrowCount;
+               printString("No AI type selected, default set to random.\n");
+               aiType=0;
+               ((ComputerPlayer) player2).setAI(aiType);
+           }
+           else if(throwCount==1||throwCount==0)
+           {
+               aiType=throwCount;
+               throwCount=defaultThrowCount;
+               ((ComputerPlayer) player2).setAI(aiType);
+               printString("No throw count found. Set to default, "+
+                              defaultThrowCount+"\n");
+           }
+           else
+           {
+               printString("No throw count found. Set to default, "
+                             +defaultThrowCount+"\n");
+               printString("No AI type selected, default set to random.\n");
+           }
+
+
+       }
+       else// if (index==1)
+       {
+           throwCount=Integer.decode(args[index-1]).intValue();
+           aiType=Integer.decode(args[index]).intValue();
+           if(throwCount<=0)
+           {
+               printString("Invalid throw count. Set to default, "
+                                         +defaultThrowCount+"\n");
+               throwCount=defaultThrowCount;
+           }
+           if((aiType!=1)&&(aiType!=0))
+           {
+               printString("Invalid AI type. Set to random.\n");
+               aiType=0;
+           }
+           ((ComputerPlayer) player2).setAI(aiType);
+       }
+       //System.out.println(throwCount);
+       /**
        else
        {
            throwCount=Integer.decode(args[index]).intValue();
            if(throwCount<=0)
            {
-               printString("Invalid throw count. Set to default, 20\n");
-               throwCount=20;
+               printString("Invalid throw count. Set to default, "
+                               +defaultThrowCount+"\n");
+               throwCount=defaultThrowCount;
            }
        }    
-       
+       **/
        printString("   ROCK - PAPER - SCISSORS   \n");
        printString("         Team KAI            \n");
        int command=-1;
@@ -189,11 +250,11 @@ public class RPSFrontEnd
       }
     if(parceMe.equals("1")|| parceMe.equalsIgnoreCase("match"))
       {
-          printString("Set AI level (1-random 2-smart):");
-          Scanner sc = new Scanner(System.in);
-          String level = sc.nextLine();
-          if (player2 instanceof ComputerPlayer)
-              ((ComputerPlayer) player2).setAI(level);
+          //printString("Set AI level (1-random 2-smart):");
+          //Scanner sc = new Scanner(System.in);
+          //String level = sc.nextLine();
+          //if (player2 instanceof ComputerPlayer)
+            //  ((ComputerPlayer) player2).setAI(level);
           /*input throwCount
           printString("Enter the number of throws per match: ");
           try 
@@ -305,6 +366,5 @@ public class RPSFrontEnd
      {
          temp += t.poll();
      }
-     
  }
 }
