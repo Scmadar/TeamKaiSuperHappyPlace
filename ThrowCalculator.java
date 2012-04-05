@@ -17,13 +17,17 @@ public abstract class ThrowCalculator
         switch(level)
         {
             case 0:
-                System.out.println("\nAI Level 1 (Random).");
+                //System.out.println("\nAI Level 1 (Random).");
                 return new RandomThrow();
 
             case 1:
-                System.out.println("\nAI Level 2 (Smart).");
+                //System.out.println("\nAI Level 2 (Smart).");
                 return new SmartThrow();
 
+            case 2:
+                return new GeniusThrow();
+              
+              
             default:
                 System.out.println("Invalid input. AI level is set to default.");
                 System.out.println("\nAI Level 1 (Random).");

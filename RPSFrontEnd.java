@@ -13,7 +13,9 @@ public class RPSFrontEnd
     static Player player2=new ComputerPlayer();
     static Scanner in=new Scanner(System.in);
     static Match current=null;
-    private static int aiType=0;
+    private static final int defaultAiType=0;
+    private static int aiType=defaultAiType;
+    
   
  /**
   * @param args the command line arguments
@@ -34,7 +36,7 @@ public class RPSFrontEnd
                                    defaultThrowCount+".\n");
            throwCount=defaultThrowCount;
            printString("No AI type selected, default set to random.\n");
-           aiType=0;
+           aiType=defaultAiType;
            ((ComputerPlayer) player2).setAI(aiType);
        }
        else if (index==0)
@@ -46,7 +48,7 @@ public class RPSFrontEnd
                                           +defaultThrowCount+"\n");
                throwCount=defaultThrowCount;
                printString("No AI type selected, default set to random.\n");
-               aiType=0;
+               aiType=defaultAiType;
                ((ComputerPlayer) player2).setAI(aiType);
            }
            else if(throwCount==1||throwCount==0)
@@ -62,6 +64,8 @@ public class RPSFrontEnd
                printString("No throw count found. Set to default, "
                              +defaultThrowCount+"\n");
                printString("No AI type selected, default set to random.\n");
+               aiType=defaultAiType;
+               throwCount=defaultThrowCount;
            }
 
 
@@ -79,7 +83,7 @@ public class RPSFrontEnd
            if((aiType!=1)&&(aiType!=0))
            {
                printString("Invalid AI type. Set to random.\n");
-               aiType=0;
+               aiType=defaultAiType;
            }
            ((ComputerPlayer) player2).setAI(aiType);
        }
@@ -337,15 +341,33 @@ public class RPSFrontEnd
                            //display the match-specific stats
       {
            int[] temp=current.getStats();
-           printString("===Stats for the current match===\n");
+           printString("\n===Stats for the current match===\n");
            printString("Player 1 wins: "+temp[0]+"\n");
            printString("Computer wins: "+temp[1]+"\n");
-           printString("Ties: "+temp[2]+"\n\n");
+           printString("Ties: "+temp[2]+"\n");
            printString("Current match progress: "+current.getThrowCount()
-                +" of "+throwCount+" throws left.\n\n");
+                +" of "+throwCount+" throws left.\n");
+           
       }
+    else
+    {
+        printString("\nMatch length: "+throwCount+"\n");
+    }
+    printString("AI type: ");
+    switch(aiType)
+    {
+        case 0: printString("Random");
+               break;
+        case 1: printString("Smart");
+               break;
+        case 2: printString("Genius");
+               break;
+        default: printString("This is impossible. Fix this.");
+    }
+    printString("\n");
+    
     Stats temp=player1.getStats();
-    printString("===Player stats===\n");
+    printString("\n===Player stats===\n");
     printString("Wins: "+temp.getWins()+"\n");
     printString("Losses: "+temp.getLosses()+"\n");
     printString("Ties: "+temp.getTies()+"\n\n");
