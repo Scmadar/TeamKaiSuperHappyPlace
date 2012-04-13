@@ -22,6 +22,62 @@ public class RPSFrontEnd
   */
  public static void main(String[] args)
    {
+       for(int i=0;i<args.length;i++)
+           {if(args[i].equalsIgnoreCase("-g")||args[i].equalsIgnoreCase("-G"))
+                //g for GUI
+               {/*
+              * Set the Nimbus look and feel
+              */
+             //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+            
+              /*
+               * Create and display the form
+               */
+              java.awt.EventQueue.invokeLater(new Runnable()
+                {
+
+                  @Override
+                  public void run() {
+                    
+                  
+                      new NewJFrame().setVisible(true);
+                  }
+                 });
+              }
+           return;
+           }// end command line parsing.
+       
+       /**
+        * It should be noted that currently the -g option overrides all other 
+        *    command line arguments, but it's not too big a deal since you can
+        *    customize them with the slick GUI instead.
+        * 
+       */
+   
+   
+   
        int index=args.length-1;
        //get throw count and ai level from the command line argument
        //ai level is the last argument, throw count is the second to last.
