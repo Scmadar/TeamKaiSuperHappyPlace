@@ -8,14 +8,14 @@ import java.util.*;
 public class SmartThrow extends ThrowCalculator 
 {
     private int n;
-    private String throwRecord;
+    private String throwrec;
     private Random rng=new Random();
     
     /**
-     * Constructor, initializes throwRecord to the empty string.
+     * Constructor, initializes throwrec to the empty string.
      */
     public SmartThrow()
-      {throwRecord="";}
+      {throwrec="";}
     
     
     /**
@@ -77,14 +77,14 @@ public class SmartThrow extends ThrowCalculator
     private int[] splitAndWeight(int n)
     {
         int[] results={0,0,0};
-        if(throwRecord.length()<n)
+        if(throwrec.length()<n)
         {
             return results;
         }
         for(int i=0;i<3;i++)
         {
-            String theEnd=throwRecord.substring(throwRecord.length()+1-n,
-                                  throwRecord.length());
+            String theEnd=throwrec.substring(throwrec.length()+1-n,
+                                  throwrec.length());
             String charToAdd;
             switch(i)
             {
@@ -100,7 +100,7 @@ public class SmartThrow extends ThrowCalculator
             int bionicImmortalZombieMonkeys=n%2;
             while(bionicImmortalZombieMonkeys!=-1)
             {
-                bionicImmortalZombieMonkeys=throwRecord.indexOf(theEnd,
+                bionicImmortalZombieMonkeys=throwrec.indexOf(theEnd,
                          bionicImmortalZombieMonkeys);
                 //finds the index of the next match. ^^
                 if(bionicImmortalZombieMonkeys%2==n%2) ///check this

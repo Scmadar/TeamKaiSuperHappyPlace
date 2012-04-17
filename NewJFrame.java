@@ -4,17 +4,32 @@
  */
 package RPS;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Think
  */
 public class NewJFrame extends javax.swing.JFrame {
 
+    private static final int defaultThrowCount=50;
+    private static int throwCount=defaultThrowCount;
+    static Player player1=new HumanPlayer();
+    static Player player2=new ComputerPlayer();
+    static Scanner in=new Scanner(System.in);
+    static Match current=null;
+    
+    private static final int defaultAiType=0;
+    private static int aiType=defaultAiType;
     /**
      * Creates new form NewJFrame
      */
     public NewJFrame() {
         initComponents();
+        ((ComputerPlayer) player2).setAI(aiType);
+        current=new Match(throwCount);
+
+        
     }
 
     /**
@@ -35,8 +50,11 @@ public class NewJFrame extends javax.swing.JFrame {
         AIList = new javax.swing.JList();
         jPanel3 = new javax.swing.JPanel();
         scoreLabel = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        scoreTextArea = new javax.swing.JTextArea();
+        winsLabel = new javax.swing.JLabel();
+        lossesLabel = new javax.swing.JLabel();
+        tiesLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         pButton = new javax.swing.JButton();
         rButton = new javax.swing.JButton();
@@ -61,34 +79,53 @@ public class NewJFrame extends javax.swing.JFrame {
         AIList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         AIList.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         AIList.setSelectedIndex(0);
+        AIList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                AIListValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(AIList);
 
         scoreLabel.setText("Score:");
 
-        scoreTextArea.setColumns(20);
-        scoreTextArea.setRows(5);
-        jScrollPane3.setViewportView(scoreTextArea);
+        winsLabel.setText("Wins");
+
+        lossesLabel.setText("Losses");
+
+        tiesLabel.setText("Ties");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 61, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(103, Short.MAX_VALUE)
                 .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lossesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(winsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tiesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(winsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lossesLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tiesLabel)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
+
+        jLabel4.setText("Computer Choice");
+
+        jLabel5.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -96,13 +133,18 @@ public class NewJFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(throwcountLabel)
-                    .addComponent(AILabel))
-                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(throwcountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(throwcountLabel)
+                            .addComponent(AILabel))
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(throwcountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -112,7 +154,9 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(21, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(throwcountLabel)
@@ -120,8 +164,12 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(AILabel)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addGap(47, 47, 47))))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -129,6 +177,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         pButton.setText("Paper");
+        pButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -137,6 +190,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel2.add(pButton, gridBagConstraints);
 
         rButton.setText("Rock");
+        rButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -144,6 +202,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel2.add(rButton, gridBagConstraints);
 
         sButton.setText("Scissors");
+        sButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -175,6 +238,41 @@ public class NewJFrame extends javax.swing.JFrame {
     private void helpMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpMenuActionPerformed
         
     }//GEN-LAST:event_helpMenuActionPerformed
+
+    private void rButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rButtonActionPerformed
+     
+        int winner;
+        int cputhrow=player2.getThrows();
+        winner=current.checkRound(0, cputhrow);
+        updateScore(winner);
+    }//GEN-LAST:event_rButtonActionPerformed
+
+    private void pButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pButtonActionPerformed
+        int winner;
+        int cputhrow=player2.getThrows();
+        winner=current.checkRound(1, cputhrow);
+        updateScore(winner);
+    }//GEN-LAST:event_pButtonActionPerformed
+
+    private void sButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sButtonActionPerformed
+        int winner;        
+        int cputhrow=player2.getThrows();
+        winner=current.checkRound(2, cputhrow);
+        updateScore(winner);
+    }//GEN-LAST:event_sButtonActionPerformed
+
+    private void AIListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_AIListValueChanged
+        if (AIList.getSelectedIndex()==0)
+        {
+            aiType=0;
+            
+        }
+        else if (AIList.getSelectedIndex()==1)
+        {
+            aiType=1;
+        }
+        ((ComputerPlayer) player2).setAI(aiType);
+    }//GEN-LAST:event_AIListValueChanged
 /**  //commented out the main method
     /**
      * @param args the command line arguments
@@ -219,23 +317,59 @@ public class NewJFrame extends javax.swing.JFrame {
     }
     */
     
+    private void updateScore(int winner) 
+    {
+        switch(winner)
+        {
+            case -1: player1.incrementWins();
+                player2.incrementLosses();
+                winsLabel.setText("Wins: "+player1.getStats().getWins());
+                break;
+            case 0: player1.incrementTies();
+                player2.incrementTies();
+                tiesLabel.setText("Ties: "+player1.getStats().getTies());
+                break;
+            case 1: player1.incrementLosses();
+                player2.incrementWins();
+                lossesLabel.setText("Losses: "+player1.getStats().getLosses());
+                break;
+            default:
+                
+        }
+        
+        String temp=throwcountTextField.getText();
+        int value=Integer.parseInt(temp);
+        value--;
+        if(value<=0)
+        {//end match
+         value=0;
+        }
+        throwcountTextField.setText(new Integer(value).toString());
+        throwCount=value;
+        
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AILabel;
     private javax.swing.JList AIList;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lossesLabel;
     private javax.swing.JButton pButton;
     private javax.swing.JButton rButton;
     private javax.swing.JButton sButton;
     private javax.swing.JLabel scoreLabel;
-    private javax.swing.JTextArea scoreTextArea;
     private javax.swing.JLabel throwchoiceLabel;
     private javax.swing.JLabel throwcountLabel;
     private javax.swing.JTextField throwcountTextField;
+    private javax.swing.JLabel tiesLabel;
+    private javax.swing.JLabel winsLabel;
     // End of variables declaration//GEN-END:variables
 }
