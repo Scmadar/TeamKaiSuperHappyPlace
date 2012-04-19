@@ -55,6 +55,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        resetButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         pButton = new javax.swing.JButton();
         rButton = new javax.swing.JButton();
@@ -137,6 +138,13 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        resetButton.setText("Reset Match");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -157,7 +165,10 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resetButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -169,7 +180,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(resetButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(throwcountLabel)
@@ -302,6 +315,14 @@ public class NewJFrame extends javax.swing.JFrame {
     private void throwcountTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwcountTextFieldActionPerformed
 
     }//GEN-LAST:event_throwcountTextFieldActionPerformed
+
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+       current.matchIsOver();
+       JOptionPane.showMessageDialog(null,"The game is reset","Reset Game",JOptionPane.INFORMATION_MESSAGE);
+       current.setThrowCount(defaultThrowCount);
+       throwcountTextField.setText(new Integer(defaultThrowCount).toString());
+       enableFields();
+    }//GEN-LAST:event_resetButtonActionPerformed
 /**  //commented out the main method
     /**
      * @param args the command line arguments
@@ -419,6 +440,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lossesLabel;
     private javax.swing.JButton pButton;
     private javax.swing.JButton rButton;
+    private javax.swing.JButton resetButton;
     private javax.swing.JButton sButton;
     private javax.swing.JLabel scoreLabel;
     private javax.swing.JLabel throwchoiceLabel;
