@@ -15,6 +15,7 @@ public class NewJFrame extends javax.swing.JFrame {
     static Player player2=new ComputerPlayer();
     static Scanner in=new Scanner(System.in);
     static Match current=null;
+    ThrowCalculator[] robotunicornattack=new ThrowCalculator[3];
     
     private static final int defaultAiType=0;
     private static int aiType=defaultAiType;
@@ -23,7 +24,9 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
-        ((ComputerPlayer) player2).setAI(aiType);
+        for(int i=0;i<3;i++)
+          {robotunicornattack[i]=ThrowCalculator.makeCalculator(i);
+          }
         current=new Match(throwCount);
         setLocationRelativeTo(null);
         ((ComputerPlayer)player2).setAI(robotunicornattack[defaultAiType]);
@@ -280,7 +283,7 @@ public class NewJFrame extends javax.swing.JFrame {
         {
             aiType=1;
         }
-        ((ComputerPlayer) player2).setAI(aiType);
+        ((ComputerPlayer) player2).setAI(robotunicornattack[aiType]);
     }//GEN-LAST:event_AIListValueChanged
 
   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
