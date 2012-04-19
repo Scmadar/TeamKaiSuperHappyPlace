@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package RPS;
 
 import java.util.Scanner;
@@ -5,7 +9,7 @@ import javax.swing.*;
 
 /**
  *
- * @author KAI
+ * @author Think
  */
 public class NewJFrame extends javax.swing.JFrame {
 
@@ -15,6 +19,7 @@ public class NewJFrame extends javax.swing.JFrame {
     static Player player2=new ComputerPlayer();
     static Scanner in=new Scanner(System.in);
     static Match current=null;
+    ThrowCalculator[] robotunicornattack=new ThrowCalculator[3];
     
     private static final int defaultAiType=0;
     private static int aiType=defaultAiType;
@@ -23,8 +28,12 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
-        ((ComputerPlayer) player2).setAI(aiType);
+        for(int i=0;i<3;i++)
+          {robotunicornattack[i]=ThrowCalculator.makeCalculator(i);
+          }
         current=new Match(throwCount);
+        setLocationRelativeTo(null);
+
         
     }
 
@@ -277,7 +286,7 @@ public class NewJFrame extends javax.swing.JFrame {
         {
             aiType=1;
         }
-        ((ComputerPlayer) player2).setAI(aiType);
+        ((ComputerPlayer) player2).setAI(robotunicornattack[aiType]);
     }//GEN-LAST:event_AIListValueChanged
 
   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
@@ -293,7 +302,7 @@ public class NewJFrame extends javax.swing.JFrame {
        "  -Paper covers Rock\n"+
        "The player with the most wins at the end of\n"+
        "the match is the winner!";
-      JOptionPane.showMessageDialog(null,adfh,"HELP PAGE",JOptionPane.INFORMATION_MESSAGE);
+      JOptionPane.showMessageDialog(null,adfh,"Help is here!",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void throwcountTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwcountTextFieldActionPerformed
@@ -388,20 +397,15 @@ public class NewJFrame extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,victor,"The game is over:",JOptionPane.WARNING_MESSAGE);
            current.setThrowCount(defaultThrowCount);
            throwcountTextField.setText(new Integer(defaultThrowCount).toString());
-           enableFields();
           }
           
+          
+        
         
     }
     public void disableFields() {
        throwcountTextField.setEditable(false);
        AIList.setEnabled(false);
-    }
-    
-    public void enableFields() {
-        throwcountTextField.setEditable(true);
-        AIList.setEnabled(true);
-         
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

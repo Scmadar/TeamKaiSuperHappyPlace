@@ -27,6 +27,10 @@ public class ComputerPlayer extends Player
         throwcalc = ThrowCalculator.makeCalculator(level);
     }
     
+    public void setAI(ThrowCalculator c)
+      {throwcalc=c;
+      }
+    
     /**
      * This returns the throw for computer player
      * @return the throw for computer
