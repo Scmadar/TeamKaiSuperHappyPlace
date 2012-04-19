@@ -21,10 +21,16 @@ public class RPSFrontEnd
   * @param args the command line arguments
   */
  public static void main(String[] args)
-   {
+   {boolean commandline=false;
        for(int i=0;i<args.length;i++)
-           {if(args[i].equalsIgnoreCase("-g")||args[i].equalsIgnoreCase("-G"))
-                //g for GUI
+           {if(args[i].equalsIgnoreCase("-c"))
+             {commandline=true;
+              break;}
+           }
+       if(!commandline)
+         {
+             
+                //c for command line
                {/*
               * Set the Nimbus look and feel
               */
@@ -70,9 +76,9 @@ public class RPSFrontEnd
            }// end command line parsing.
        
        /**
-        * It should be noted that currently the -g option overrides all other 
-        *    command line arguments, but it's not too big a deal since you can
-        *    customize them with the slick GUI instead.
+        * It should be noted that currently the -c option is the only way to 
+        *    start in commmand-line mode, and if it is not found all other
+        *    arguments will be ignored (and the gui should start).
         * 
        */
    
@@ -182,7 +188,6 @@ public class RPSFrontEnd
      while(!current.matchIsOver())
      {
          String results="";
-         winner=0;
          int p1Throw = -1;
          while(p1Throw==-1)
          {               
@@ -385,7 +390,7 @@ public class RPSFrontEnd
        printString("  -Scissors cuts Paper\n");
        printString("  -Paper covers Rock\n");
        printString("The player with the most wins at the end of "
-            + "the round is the winner!\n\n");
+            + "the match is the winner!\n\n");
    }
 
  /**
