@@ -25,9 +25,6 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         ((ComputerPlayer) player2).setAI(aiType);
         current=new Match(throwCount);
-        setLocationRelativeTo(null);
-        ((ComputerPlayer)player2).setAI(robotunicornattack[defaultAiType]);
-
         
     }
 
@@ -367,13 +364,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         
         String temp=throwcountTextField.getText();
-        int value;
-        try{
-           value=Integer.parseInt(temp);
-           }
-        catch(Exception e)
-          {value=throwCount;
-          } 
+        int value=Integer.parseInt(temp);
         value--;
         if(value<=0)
         {//end match
@@ -389,7 +380,7 @@ public class NewJFrame extends javax.swing.JFrame {
            if (player1.getStats().getWins()>player2.getStats().getWins())
                        victor="You won!";
            else if (player1.getStats().getWins()<player2.getStats().getWins())
-               victor="You lost!\nn00b!";
+               victor="You lost!";
            else   
                victor="You tied!";
            
@@ -408,8 +399,8 @@ public class NewJFrame extends javax.swing.JFrame {
     }
     
     public void enableFields() {
-       throwcountTextField.setEditable(true);
-       AIList.setEnabled(true);   
+        throwcountTextField.setEditable(true);
+        AIList.setEnabled(true);   
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
