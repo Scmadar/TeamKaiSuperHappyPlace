@@ -388,6 +388,7 @@ public class NewJFrame extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,victor,"The game is over:",JOptionPane.WARNING_MESSAGE);
            current.setThrowCount(defaultThrowCount);
            throwcountTextField.setText(new Integer(defaultThrowCount).toString());
+           enableFields();
           }
           
         
@@ -395,6 +396,12 @@ public class NewJFrame extends javax.swing.JFrame {
     public void disableFields() {
        throwcountTextField.setEditable(false);
        AIList.setEnabled(false);
+    }
+    
+    public void enableFields() {
+        throwcountTextField.setEditable(true);
+        AIList.setEnabled(true);
+         
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
