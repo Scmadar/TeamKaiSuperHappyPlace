@@ -64,6 +64,7 @@ public class NewJFrame extends javax.swing.JFrame {
         throwchoiceLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         throwcountLabel.setText("Number of throw:");
 
@@ -434,11 +435,16 @@ public class NewJFrame extends javax.swing.JFrame {
           
         
     }
+    /**
+     * Disable throw count Field and AI Level List during the match
+     */
     public void disableFields() {
        throwcountTextField.setEditable(false);
        AIList.setEnabled(false);
     }
-    
+    /**
+     * Enable throw count Field and AI Level list
+     */
     public void enableFields() {
         throwcountTextField.setEditable(true);
         AIList.setEnabled(true);   
