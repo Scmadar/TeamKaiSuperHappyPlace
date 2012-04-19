@@ -33,6 +33,7 @@ public class NewJFrame extends javax.swing.JFrame {
           }
         current=new Match(throwCount);
         setLocationRelativeTo(null);
+        ((ComputerPlayer)player2).setAI(robotunicornattack[defaultAiType]);
 
         
     }
@@ -373,7 +374,13 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         
         String temp=throwcountTextField.getText();
-        int value=Integer.parseInt(temp);
+        int value;
+        try{
+           value=Integer.parseInt(temp);
+           }
+        catch(Exception e)
+          {value=throwCount;
+          } 
         value--;
         if(value<=0)
         {//end match
@@ -389,7 +396,7 @@ public class NewJFrame extends javax.swing.JFrame {
            if (player1.getStats().getWins()>player2.getStats().getWins())
                        victor="You won!";
            else if (player1.getStats().getWins()<player2.getStats().getWins())
-               victor="You lost!";
+               victor="You lost!\nn00b!";
            else   
                victor="You tied!";
            
