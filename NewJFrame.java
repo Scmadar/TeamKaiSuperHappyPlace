@@ -403,10 +403,11 @@ public class NewJFrame extends javax.swing.JFrame {
            throwcountTextField.setText(new Integer(defaultThrowCount).toString());
            enableFields();
            winsLabel.setText("Wins:0");
-           tiesLabel.setText("Wins:0");
-           lossesLabel.setText("Wins:0");
+           tiesLabel.setText("Ties:0");
+           lossesLabel.setText("Losses:0");
            player1.getStats().resetWinsLossesTies();
            player2.getStats().resetWinsLossesTies();
+           computerChoiceLabel.setText("Computer Choice:");
            
           }
           
