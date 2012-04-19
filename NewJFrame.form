@@ -53,7 +53,7 @@
                               </Group>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="computerChoiceLabel" alignment="0" pref="216" max="32767" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="predictionLabel" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -94,7 +94,7 @@
                   <EmptySpace pref="57" max="32767" attributes="0"/>
                   <Component id="computerChoiceLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <Component id="predictionLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -210,9 +210,9 @@
             <Property name="text" type="java.lang.String" value="Computer Choice: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="predictionLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel5"/>
+            <Property name="text" type="java.lang.String" value="Computer prediction:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">

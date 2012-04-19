@@ -37,6 +37,7 @@ public class SmartThrow extends ThrowCalculator
           }
           if(results[0]==results[1]&&results[1]==results[2])
           {
+              prediction=-1;
               return rng.nextInt(3); //0-2 inclusive
           }
           int max=Math.max(results[0],results[1]);
@@ -61,15 +62,18 @@ public class SmartThrow extends ThrowCalculator
                   int temp=rng.nextInt(2); //0-1 inclusive
                   if(temp==0)
                   {
-                      return indexOfMax;
+                      prediction=indexOfMax;
+                      return prediction;
                   }
                   else
                   {
-                      return i;
+                      prediction=i;
+                      return prediction;
                   }
               }
          }
-          return indexOfMax;
+          prediction=indexOfMax;
+          return prediction;
       }
     ///I'm not convinced this is working properly, in a 30 round match I got
        /// a score of 11/15/4 W/L/T, while spamming rock. Perhaps it just isn't

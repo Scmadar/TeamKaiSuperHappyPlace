@@ -7,6 +7,7 @@ package RPS;
 public abstract class ThrowCalculator
 {
     private String throwrec = "";
+    int prediction=-1;
     /**
      * Factory method to create object of RandomThrow or SmartThrow at run time
      * @param level AI level, either random or smart
@@ -44,4 +45,7 @@ public abstract class ThrowCalculator
     {
         throwrec += str;
     }
+     
+    public int getPrediction()
+      {return prediction;}
 }
