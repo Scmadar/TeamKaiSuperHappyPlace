@@ -52,7 +52,7 @@ public class NewJFrame extends javax.swing.JFrame {
         winsLabel = new javax.swing.JLabel();
         lossesLabel = new javax.swing.JLabel();
         tiesLabel = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        computerChoiceLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
@@ -127,7 +127,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap(110, Short.MAX_VALUE))
         );
 
-        jLabel4.setText("Computer Choice");
+        computerChoiceLabel.setText("Computer Choice: ");
 
         jLabel5.setText("jLabel5");
 
@@ -163,7 +163,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                     .addComponent(throwcountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                                .addComponent(computerChoiceLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -178,7 +178,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -191,8 +191,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AILabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(computerChoiceLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addGap(47, 47, 47))
@@ -398,6 +398,7 @@ public class NewJFrame extends javax.swing.JFrame {
         throwCount=value;
         current.setThrowCount(throwCount);
         String victor="";
+        computerChoiceLabel.setText("Computer Choice: "+ getThrowsAsString(player2.getThrows()));
         if(current.matchIsOver())
           {
           
@@ -413,6 +414,13 @@ public class NewJFrame extends javax.swing.JFrame {
            current.setThrowCount(defaultThrowCount);
            throwcountTextField.setText(new Integer(defaultThrowCount).toString());
            enableFields();
+           winsLabel.setText("Wins:0");
+           tiesLabel.setText("Ties:0");
+           lossesLabel.setText("Losses:0");
+           player1.getStats().resetWinsLossesTies();
+           player2.getStats().resetWinsLossesTies();
+           computerChoiceLabel.setText("Computer Choice:");
+           
           }
           
         
@@ -427,11 +435,35 @@ public class NewJFrame extends javax.swing.JFrame {
         AIList.setEnabled(true);   
     }
     
+    
+     /**
+     * This converts an integer to a rock paper or scissors throw
+     * @param toString the integer to convert
+     * @return the integer as a string
+     */
+    String getThrowsAsString(int toString)
+    {
+        String toReturn="";
+        
+        if (toString==0)
+            toReturn="Rock";
+        else if (toString==1)
+            toReturn="Paper";
+        else if (toString==2)
+            toReturn="Scissors";
+        else 
+        toReturn=null;
+        
+        return toReturn;         
+    }
+
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AILabel;
     private javax.swing.JList AIList;
+    private javax.swing.JLabel computerChoiceLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
