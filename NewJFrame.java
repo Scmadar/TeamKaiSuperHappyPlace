@@ -260,6 +260,7 @@ public class NewJFrame extends javax.swing.JFrame {
         int cputhrow=player2.getThrows();
         winner=current.checkRound(0, cputhrow);
          throwchoiceLabel.setText("Throw Choice: rock");
+          computerChoiceLabel.setText("Computer Choice: "+ getThrowsAsString(cputhrow));
         updateScore(winner);
        
     }//GEN-LAST:event_rButtonActionPerformed
@@ -270,6 +271,7 @@ public class NewJFrame extends javax.swing.JFrame {
         int cputhrow=player2.getThrows();
         winner=current.checkRound(1, cputhrow);
         throwchoiceLabel.setText("Throw Choice: paper");
+        computerChoiceLabel.setText("Computer Choice: "+ getThrowsAsString(cputhrow));
         updateScore(winner);
         
     }//GEN-LAST:event_pButtonActionPerformed
@@ -280,6 +282,7 @@ public class NewJFrame extends javax.swing.JFrame {
         int cputhrow=player2.getThrows();
         winner=current.checkRound(2, cputhrow);
         throwchoiceLabel.setText("Throw Choice: scissors");
+        computerChoiceLabel.setText("Computer Choice: "+ getThrowsAsString(cputhrow));
         updateScore(winner);
         
     }//GEN-LAST:event_sButtonActionPerformed
@@ -404,7 +407,7 @@ public class NewJFrame extends javax.swing.JFrame {
         throwCount=value;
         current.setThrowCount(throwCount);
         String victor="";
-        computerChoiceLabel.setText("Computer Choice: "+ getThrowsAsString(player2.getThrows()));
+       
         if(current.matchIsOver())
           {
           
