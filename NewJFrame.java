@@ -28,6 +28,7 @@ public class NewJFrame extends javax.swing.JFrame {
           {robotunicornattack[i]=ThrowCalculator.makeCalculator(i);
           }
         current=new Match(throwCount);
+        ((ComputerPlayer) player2).setAI(robotunicornattack[defaultAiType]);
         
     }
 
