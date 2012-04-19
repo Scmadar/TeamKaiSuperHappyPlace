@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package RPS;
 
 import java.util.Scanner;
@@ -9,7 +5,7 @@ import javax.swing.*;
 
 /**
  *
- * @author Think
+ * @author KAI
  */
 public class NewJFrame extends javax.swing.JFrame {
 
@@ -384,8 +380,6 @@ public class NewJFrame extends javax.swing.JFrame {
            throwcountTextField.setText(new Integer(defaultThrowCount).toString());
           }
           
-          
-        
         
     }
     public void disableFields() {
