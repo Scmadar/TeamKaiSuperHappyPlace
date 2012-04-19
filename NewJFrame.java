@@ -74,6 +74,11 @@ public class NewJFrame extends javax.swing.JFrame {
         AILabel.setText("AI Level:");
 
         throwcountTextField.setText("50");
+        throwcountTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                throwcountTextFieldActionPerformed(evt);
+            }
+        });
 
         AIList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Random", "Smart" };
@@ -92,11 +97,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
         scoreLabel.setText("Score:");
 
-        winsLabel.setText("Wins");
+        winsLabel.setText("Wins: 0");
 
-        lossesLabel.setText("Losses");
+        lossesLabel.setText("Losses: 0");
 
-        tiesLabel.setText("Ties");
+        tiesLabel.setText("Ties: 0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -212,7 +217,7 @@ public class NewJFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 24, 0, 20);
+        gridBagConstraints.insets = new java.awt.Insets(0, 39, 0, 37);
         jPanel2.add(rButton, gridBagConstraints);
 
         sButton.setText("Scissors");
@@ -224,14 +229,15 @@ public class NewJFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 19, 0, 19);
+        gridBagConstraints.insets = new java.awt.Insets(0, 31, 0, 28);
         jPanel2.add(sButton, gridBagConstraints);
 
         throwchoiceLabel.setText("Throw Choice:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(9, 0, 8, 0);
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(9, 20, 8, 20);
         jPanel2.add(throwchoiceLabel, gridBagConstraints);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -241,24 +247,33 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void rButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rButtonActionPerformed
      
+        disableFields();
         int winner;
         int cputhrow=player2.getThrows();
         winner=current.checkRound(0, cputhrow);
+         throwchoiceLabel.setText("Throw Choice: rock");
         updateScore(winner);
+       
     }//GEN-LAST:event_rButtonActionPerformed
 
     private void pButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pButtonActionPerformed
+        disableFields();
         int winner;
         int cputhrow=player2.getThrows();
         winner=current.checkRound(1, cputhrow);
+        throwchoiceLabel.setText("Throw Choice: paper");
         updateScore(winner);
+        
     }//GEN-LAST:event_pButtonActionPerformed
 
     private void sButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sButtonActionPerformed
+        disableFields();
         int winner;        
         int cputhrow=player2.getThrows();
         winner=current.checkRound(2, cputhrow);
+        throwchoiceLabel.setText("Throw Choice: scissors");
         updateScore(winner);
+        
     }//GEN-LAST:event_sButtonActionPerformed
 
     private void AIListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_AIListValueChanged
@@ -289,6 +304,10 @@ public class NewJFrame extends javax.swing.JFrame {
        "the match is the winner!";
       JOptionPane.showMessageDialog(null,adfh,"Help is here!",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void throwcountTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwcountTextFieldActionPerformed
+
+    }//GEN-LAST:event_throwcountTextFieldActionPerformed
 /**  //commented out the main method
     /**
      * @param args the command line arguments
@@ -363,9 +382,19 @@ public class NewJFrame extends javax.swing.JFrame {
         throwcountTextField.setText(new Integer(value).toString());
         throwCount=value;
         current.setThrowCount(throwCount);
+        String victor="";
         if(current.matchIsOver())
-          {String adfh="";//match is over blah blah
-           JOptionPane.showMessageDialog(null,adfh,"Result",JOptionPane.WARNING_MESSAGE);
+          {
+          
+           if (player1.getStats().getWins()>player2.getStats().getWins())
+                       victor="You won!";
+           else if (player1.getStats().getWins()<player2.getStats().getWins())
+               victor="You lost!";
+           else   
+               victor="You tied!";
+           
+               
+           JOptionPane.showMessageDialog(null,victor,"The game is over:",JOptionPane.WARNING_MESSAGE);
            current.setThrowCount(defaultThrowCount);
            throwcountTextField.setText(new Integer(defaultThrowCount).toString());
           }
@@ -373,6 +402,10 @@ public class NewJFrame extends javax.swing.JFrame {
           
         
         
+    }
+    public void disableFields() {
+       throwcountTextField.setEditable(false);
+       AIList.setEnabled(false);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
