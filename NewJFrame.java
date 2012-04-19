@@ -29,7 +29,6 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         ((ComputerPlayer) player2).setAI(aiType);
         current=new Match(throwCount);
-
         
     }
 
@@ -70,6 +69,11 @@ public class NewJFrame extends javax.swing.JFrame {
         AILabel.setText("AI Level:");
 
         throwcountTextField.setText("50");
+        throwcountTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                throwcountTextFieldActionPerformed(evt);
+            }
+        });
 
         AIList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Random", "Smart" };
@@ -237,6 +241,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void rButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rButtonActionPerformed
      
+        disableFields();
         int winner;
         int cputhrow=player2.getThrows();
         winner=current.checkRound(0, cputhrow);
@@ -244,6 +249,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_rButtonActionPerformed
 
     private void pButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pButtonActionPerformed
+        disableFields();
         int winner;
         int cputhrow=player2.getThrows();
         winner=current.checkRound(1, cputhrow);
@@ -251,6 +257,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pButtonActionPerformed
 
     private void sButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sButtonActionPerformed
+        disableFields();
         int winner;        
         int cputhrow=player2.getThrows();
         winner=current.checkRound(2, cputhrow);
@@ -285,6 +292,10 @@ public class NewJFrame extends javax.swing.JFrame {
        "the match is the winner!";
       JOptionPane.showMessageDialog(null,adfh,"HELP PAGE",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void throwcountTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwcountTextFieldActionPerformed
+
+    }//GEN-LAST:event_throwcountTextFieldActionPerformed
 /**  //commented out the main method
     /**
      * @param args the command line arguments
@@ -369,6 +380,10 @@ public class NewJFrame extends javax.swing.JFrame {
           
         
         
+    }
+    public void disableFields() {
+       throwcountTextField.setEditable(false);
+       AIList.setEnabled(false);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
