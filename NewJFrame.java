@@ -392,6 +392,11 @@ public class NewJFrame extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,victor,"The game is over:",JOptionPane.WARNING_MESSAGE);
            current.setThrowCount(defaultThrowCount);
            throwcountTextField.setText(new Integer(defaultThrowCount).toString());
+           winsLabel.setText("Wins: 0");
+           lossesLabel.setText("Losses: 0");
+           tiesLabel.setText("Ties: 0");
+           player1.getStats().resetWinsLossesTies();
+           
           }
           
           
