@@ -88,11 +88,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
         scoreLabel.setText("Score:");
 
-        winsLabel.setText("Wins");
+        winsLabel.setText("Wins: 0");
 
-        lossesLabel.setText("Losses");
+        lossesLabel.setText("Losses: 0");
 
-        tiesLabel.setText("Ties");
+        tiesLabel.setText("Ties: 0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -208,7 +208,7 @@ public class NewJFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 24, 0, 20);
+        gridBagConstraints.insets = new java.awt.Insets(0, 39, 0, 37);
         jPanel2.add(rButton, gridBagConstraints);
 
         sButton.setText("Scissors");
@@ -220,14 +220,15 @@ public class NewJFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 19, 0, 19);
+        gridBagConstraints.insets = new java.awt.Insets(0, 31, 0, 28);
         jPanel2.add(sButton, gridBagConstraints);
 
         throwchoiceLabel.setText("Throw Choice:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(9, 0, 8, 0);
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(9, 20, 8, 20);
         jPanel2.add(throwchoiceLabel, gridBagConstraints);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -240,21 +241,27 @@ public class NewJFrame extends javax.swing.JFrame {
         int winner;
         int cputhrow=player2.getThrows();
         winner=current.checkRound(0, cputhrow);
+         throwchoiceLabel.setText("Throw Choice: rock");
         updateScore(winner);
+       
     }//GEN-LAST:event_rButtonActionPerformed
 
     private void pButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pButtonActionPerformed
         int winner;
         int cputhrow=player2.getThrows();
         winner=current.checkRound(1, cputhrow);
+        throwchoiceLabel.setText("Throw Choice: paper");
         updateScore(winner);
+        
     }//GEN-LAST:event_pButtonActionPerformed
 
     private void sButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sButtonActionPerformed
         int winner;        
         int cputhrow=player2.getThrows();
         winner=current.checkRound(2, cputhrow);
+        throwchoiceLabel.setText("Throw Choice: scissors");
         updateScore(winner);
+        
     }//GEN-LAST:event_sButtonActionPerformed
 
     private void AIListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_AIListValueChanged
