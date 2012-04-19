@@ -322,6 +322,11 @@ public class NewJFrame extends javax.swing.JFrame {
        JOptionPane.showMessageDialog(null,"The game is reset","Reset Game",JOptionPane.INFORMATION_MESSAGE);
        current.setThrowCount(defaultThrowCount);
        throwcountTextField.setText(new Integer(defaultThrowCount).toString());
+       winsLabel.setText("Wins:0");
+       tiesLabel.setText("Ties:0");
+       lossesLabel.setText("Losses:0");
+       player1.getStats().resetWinsLossesTies();
+       player2.getStats().resetWinsLossesTies();
        enableFields();
     }//GEN-LAST:event_resetButtonActionPerformed
 /**  //commented out the main method
