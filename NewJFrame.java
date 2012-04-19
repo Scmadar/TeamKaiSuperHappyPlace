@@ -54,7 +54,7 @@ public class NewJFrame extends javax.swing.JFrame {
         lossesLabel = new javax.swing.JLabel();
         tiesLabel = new javax.swing.JLabel();
         computerChoiceLabel = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        predictionLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -130,7 +130,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         computerChoiceLabel.setText("Computer Choice: ");
 
-        jLabel5.setText("jLabel5");
+        predictionLabel.setText("Computer prediction:");
 
         jButton1.setText("Help!");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +165,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(computerChoiceLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(predictionLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,7 +195,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(computerChoiceLabel)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(predictionLabel)
                 .addGap(47, 47, 47))
         );
 
@@ -260,7 +260,6 @@ public class NewJFrame extends javax.swing.JFrame {
         int cputhrow=player2.getThrows();
         winner=current.checkRound(0, cputhrow);
          throwchoiceLabel.setText("Throw Choice: rock");
-          computerChoiceLabel.setText("Computer Choice: "+ getThrowsAsString(cputhrow));
         updateScore(winner);
        
     }//GEN-LAST:event_rButtonActionPerformed
@@ -271,7 +270,6 @@ public class NewJFrame extends javax.swing.JFrame {
         int cputhrow=player2.getThrows();
         winner=current.checkRound(1, cputhrow);
         throwchoiceLabel.setText("Throw Choice: paper");
-        computerChoiceLabel.setText("Computer Choice: "+ getThrowsAsString(cputhrow));
         updateScore(winner);
         
     }//GEN-LAST:event_pButtonActionPerformed
@@ -282,7 +280,6 @@ public class NewJFrame extends javax.swing.JFrame {
         int cputhrow=player2.getThrows();
         winner=current.checkRound(2, cputhrow);
         throwchoiceLabel.setText("Throw Choice: scissors");
-        computerChoiceLabel.setText("Computer Choice: "+ getThrowsAsString(cputhrow));
         updateScore(winner);
         
     }//GEN-LAST:event_sButtonActionPerformed
@@ -325,11 +322,8 @@ public class NewJFrame extends javax.swing.JFrame {
        JOptionPane.showMessageDialog(null,"The game is reset","Reset Game",JOptionPane.INFORMATION_MESSAGE);
        current.setThrowCount(defaultThrowCount);
        throwcountTextField.setText(new Integer(defaultThrowCount).toString());
-       winsLabel.setText("Wins:0");
-       tiesLabel.setText("Ties:0");
-       lossesLabel.setText("Losses:0");
-       player1.getStats().resetWinsLossesTies();
-       player2.getStats().resetWinsLossesTies();
+       predictionLabel.setText("Computer prediction:");
+       computerChoiceLabel.setText("Computer choice:");
        enableFields();
     }//GEN-LAST:event_resetButtonActionPerformed
 /**  //commented out the main method
@@ -407,7 +401,9 @@ public class NewJFrame extends javax.swing.JFrame {
         throwCount=value;
         current.setThrowCount(throwCount);
         String victor="";
-       
+        int cpuPrediction=robotunicornattack[aiType].prediction;
+        predictionLabel.setText("Computer prediction: "+getThrowsAsString(cpuPrediction));
+        computerChoiceLabel.setText("Computer Choice: "+ getThrowsAsString(player2.getThrows()));
         if(current.matchIsOver())
           {
           
@@ -460,6 +456,8 @@ public class NewJFrame extends javax.swing.JFrame {
             toReturn="Paper";
         else if (toString==2)
             toReturn="Scissors";
+        else if (toString==-1)
+            toReturn="No prediction.";
         else 
         toReturn=null;
         
@@ -473,13 +471,13 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JList AIList;
     private javax.swing.JLabel computerChoiceLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lossesLabel;
     private javax.swing.JButton pButton;
+    private javax.swing.JLabel predictionLabel;
     private javax.swing.JButton rButton;
     private javax.swing.JButton resetButton;
     private javax.swing.JButton sButton;
