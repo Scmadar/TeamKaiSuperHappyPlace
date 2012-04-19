@@ -366,9 +366,19 @@ public class NewJFrame extends javax.swing.JFrame {
         throwcountTextField.setText(new Integer(value).toString());
         throwCount=value;
         current.setThrowCount(throwCount);
+        String victor="";
         if(current.matchIsOver())
-          {String adfh="";//match is over blah blah
-           JOptionPane.showMessageDialog(null,adfh,"Result",JOptionPane.WARNING_MESSAGE);
+          {
+          
+           if (player1.getStats().getWins()>player2.getStats().getWins())
+                       victor="You won!";
+           else if (player1.getStats().getWins()<player2.getStats().getWins())
+               victor="You lost!";
+           else   
+               victor="You tied!";
+           
+               
+           JOptionPane.showMessageDialog(null,victor,"The game is over:",JOptionPane.WARNING_MESSAGE);
            current.setThrowCount(defaultThrowCount);
            throwcountTextField.setText(new Integer(defaultThrowCount).toString());
           }
