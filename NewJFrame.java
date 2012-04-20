@@ -321,11 +321,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
        current.matchIsOver();
        JOptionPane.showMessageDialog(null,"The game is reset","Reset Game",JOptionPane.INFORMATION_MESSAGE);
-       current.setThrowCount(defaultThrowCount);
-       throwcountTextField.setText(new Integer(defaultThrowCount).toString());
-       predictionLabel.setText("Computer prediction:");
-       computerChoiceLabel.setText("Computer choice:");
-       enableFields();
+       resetMatch();
     }//GEN-LAST:event_resetButtonActionPerformed
 /**  //commented out the main method
     /**
@@ -417,14 +413,7 @@ public class NewJFrame extends javax.swing.JFrame {
            
                
            JOptionPane.showMessageDialog(null,victor,"The game is over:",JOptionPane.WARNING_MESSAGE);
-           current.setThrowCount(defaultThrowCount);
-           throwcountTextField.setText(new Integer(defaultThrowCount).toString());
-           enableFields();
-           winsLabel.setText("Wins:0");
-           tiesLabel.setText("Ties:0");
-           lossesLabel.setText("Losses:0");
-           player1.getStats().resetWinsLossesTies();
-           player2.getStats().resetWinsLossesTies();
+           resetMatch();
            computerChoiceLabel.setText("Computer Choice:");
            
           }
@@ -445,7 +434,19 @@ public class NewJFrame extends javax.swing.JFrame {
         throwcountTextField.setEditable(true);
         AIList.setEnabled(true);   
     }
-    
+    /**
+     * Reset stats for new match
+     */
+    public void resetMatch() {
+           current.setThrowCount(defaultThrowCount);
+           throwcountTextField.setText(new Integer(defaultThrowCount).toString());
+           enableFields();
+           winsLabel.setText("Wins:0");
+           tiesLabel.setText("Ties:0");
+           lossesLabel.setText("Losses:0");
+           player1.getStats().resetWinsLossesTies();
+           player2.getStats().resetWinsLossesTies();
+    }
     
      /**
      * This converts an integer to a rock paper or scissors throw
