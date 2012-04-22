@@ -6,7 +6,8 @@ package RPS;
  */
 public abstract class ThrowCalculator
 {
-    private String throwrec = "";
+    private int historyLength=50; //
+    String throwrec = "";
     int prediction=-1;
     /**
      * Factory method to create object of RandomThrow or SmartThrow at run time
@@ -44,8 +45,17 @@ public abstract class ThrowCalculator
     void matchRec(String str)
     {
         throwrec += str;
+        if(throwrec.length()>historyLength)
+          {throwrec=throwrec.substring(throwrec.length()-historyLength,throwrec.length());
+          }
+        //System.out.println(throwrec); //debugging statement
     }
      
     public int getPrediction()
       {return prediction;}
+    
+    public void setHistoryLength(int setMe)
+      {if(setMe>0)
+         {historyLength=setMe;}
+      }
 }

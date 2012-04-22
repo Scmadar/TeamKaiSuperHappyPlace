@@ -311,7 +311,7 @@ public class NewJFrame extends javax.swing.JFrame {
        "  -Paper covers Rock\n"+
        "The player with the most wins at the end of\n"+
        "the match is the winner!";
-      JOptionPane.showMessageDialog(null,adfh,"HELP PAGE",JOptionPane.INFORMATION_MESSAGE);
+      JOptionPane.showMessageDialog(null,adfh,"Help is here!",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void throwcountTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_throwcountTextFieldActionPerformed
@@ -320,7 +320,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
        current.matchIsOver();
-       JOptionPane.showMessageDialog(null,"The game is reset","Reset Game",JOptionPane.INFORMATION_MESSAGE);
+       JOptionPane.showMessageDialog(null,"The game has been reset","Reset Game",JOptionPane.INFORMATION_MESSAGE);
        resetMatch();
     }//GEN-LAST:event_resetButtonActionPerformed
 /**  //commented out the main method
@@ -407,7 +407,7 @@ public class NewJFrame extends javax.swing.JFrame {
            if (player1.getStats().getWins()>player2.getStats().getWins())
                        victor="You won!";
            else if (player1.getStats().getWins()<player2.getStats().getWins())
-               victor="You lost!";
+               victor="You lost!\nn00b!";
            else   
                victor="You tied!";
            

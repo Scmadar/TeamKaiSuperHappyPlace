@@ -8,14 +8,16 @@ import java.util.*;
 public class SmartThrow extends ThrowCalculator 
 {
     private int n;
-    private String throwrec;
     private Random rng=new Random();
     
     /**
      * Constructor, initializes throwrec to the empty string.
      */
     public SmartThrow()
-      {throwrec="";}
+      {
+       //System.out.println("Hi there.");//debugging statement
+       throwrec="";
+      }
     
     
     /**
@@ -83,6 +85,7 @@ public class SmartThrow extends ThrowCalculator
         int[] results={0,0,0};
         if(throwrec.length()<n)
         {
+            //System.out.println("Too short. "+throwrec.length()+" "+n); //debugging statement
             return results;
         }
         for(int i=0;i<3;i++)
@@ -91,27 +94,39 @@ public class SmartThrow extends ThrowCalculator
                                   throwrec.length());
             String charToAdd;
             switch(i)
-            {
-                case 0: charToAdd="R";
+               {
+                case 0: charToAdd="r";
                     break;
-                case 1: charToAdd="P";
+                case 1: charToAdd="p";
                     break;
-                case 2: charToAdd="S";
+                case 2: charToAdd="s";
                     break;
-                default: charToAdd="";
-            }
+                default: charToAdd="?";
+               }
             theEnd+=charToAdd;
+            //System.out.println("theEnd: "+theEnd); //debugging statement
             int bionicImmortalZombieMonkeys=n%2;
+            //System.out.println(bionicImmortalZombieMonkeys); //debugging statement
             while(bionicImmortalZombieMonkeys!=-1)
-            {
-                bionicImmortalZombieMonkeys=throwrec.indexOf(theEnd,
+               {
+               //System.out.println("bizm: "+bionicImmortalZombieMonkeys); //debugging statement
+                int temp=throwrec.indexOf(theEnd,
                          bionicImmortalZombieMonkeys);
+                //System.out.println("indexof: "+temp+" "+theEnd+" "+throwrec); //debugging statement
+                bionicImmortalZombieMonkeys=temp;
+                if(bionicImmortalZombieMonkeys==-1)
+                  {
+                   //System.out.println("No occurences found."); //debugging statement
+                   break;
+                  }
                 //finds the index of the next match. ^^
-                if(bionicImmortalZombieMonkeys%2==n%2) ///check this
+                if(true) ///check this bionicImmortalZombieMonkeys%2==n%2
                 {//if bizm is the same... even/odd-ness as n, the result should
                   // be that the last char in the matched string has an odd
                   // index, meaning it was the other player's choice.
+                    //System.out.println("Updated the array!~"); //debugging statement
                     results[i]++;
+                    //System.out.println(results[i]); //debugging statement
                     bionicImmortalZombieMonkeys+=2;
                 }
                 else //if they aren't the same, skip it and go on to the next.

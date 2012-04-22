@@ -13,7 +13,7 @@ public class RPSFrontEnd
     static Player player2=new ComputerPlayer();
     static Scanner in=new Scanner(System.in);
     static Match current=null;
-    private static final int defaultAiType=0;
+    private static final int defaultAiType=1; //for testing default to 1
     private static int aiType=defaultAiType;
     
   
@@ -103,8 +103,10 @@ public class RPSFrontEnd
        }
        else if (index==0)
        {
-           throwCount=Integer.decode(args[0]).intValue();
-           if(throwCount<=2)
+           try{throwCount=Integer.decode(args[0]).intValue();}
+           catch(NumberFormatException e)
+             {throwCount=0;}
+           if(throwCount<=2)           
            {
                printString("Invalid throw count. Set to default, "
                                           +defaultThrowCount+"\n");
@@ -218,13 +220,13 @@ public class RPSFrontEnd
          switch (p1Throw)
          {
              case 0: printString("Rock\n");
-                results=results+"R";
+                results=results+"r";
                 break;
              case 1: printString("Paper\n");
-                results=results+"P";
+                results=results+"p";
                 break;
              case 2: printString("Scissors\n");
-                results=results+"S";
+                results=results+"s";
                 break;
              default: printString("This should be impossibble.\n");
                 results=results+"?";
@@ -258,16 +260,16 @@ public class RPSFrontEnd
          switch (p2Throw)
          {
              case 0: printString("Rock\n");
-                results="R"+results;
+                results=results+"R";
                 break;
              case 1: printString("Paper\n");
-                results="P"+results;
+                results=results+"P";
                 break;
              case 2: printString("Scissors\n");
-                results="S"+results;
+                results=results+"S";
                 break;
              default: printString("This should be impossibble.\n");
-                results="?"+results;
+                results=results+"?";
          }
 
          winner=current.checkRound(p1Throw, p2Throw);
