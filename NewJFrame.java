@@ -259,6 +259,15 @@ public class NewJFrame extends javax.swing.JFrame {
         disableFields();
         int winner;
         int cputhrow=player2.getThrows();
+        String results;
+        switch (cputhrow)
+          {case 0: results="rR"; break;
+           case 1: results="rP"; break;
+           case 2: results="rS"; break;
+           default: results="r?"; break;
+          }
+        player1.setMatchRec(results);
+        player2.setMatchRec(results);
         winner=current.checkRound(0, cputhrow);
          throwchoiceLabel.setText("Throw Choice: rock");
         updateScore(winner);
@@ -269,6 +278,15 @@ public class NewJFrame extends javax.swing.JFrame {
         disableFields();
         int winner;
         int cputhrow=player2.getThrows();
+        String results;
+        switch (cputhrow)
+          {case 0: results="pR"; break;
+           case 1: results="pP"; break;
+           case 2: results="pS"; break;
+           default: results="p?"; break;
+          }
+        player1.setMatchRec(results);
+        player2.setMatchRec(results);
         winner=current.checkRound(1, cputhrow);
         throwchoiceLabel.setText("Throw Choice: paper");
         updateScore(winner);
@@ -279,6 +297,15 @@ public class NewJFrame extends javax.swing.JFrame {
         disableFields();
         int winner;        
         int cputhrow=player2.getThrows();
+        String results;
+        switch (cputhrow)
+          {case 0: results="sR"; break;
+           case 1: results="sP"; break;
+           case 2: results="sS"; break;
+           default: results="s?"; break;
+          }
+        player1.setMatchRec(results);
+        player2.setMatchRec(results);
         winner=current.checkRound(2, cputhrow);
         throwchoiceLabel.setText("Throw Choice: scissors");
         updateScore(winner);
