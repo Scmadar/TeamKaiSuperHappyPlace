@@ -1,5 +1,8 @@
 package RPS;
 import java.util.*;
+import solomonClientLib.proxy.RemotePlayer;
+import solomonserver.Gesture;
+import solomonserver.Scorecard;
 
 /**
  *
@@ -16,6 +19,9 @@ public class RPSFrontEnd
     private static final int defaultAiType=1; //for testing default to 1
     private static int aiType=defaultAiType;
     
+    
+    private static boolean solomon=false; //flag for the Solomon server things
+    
   
  /**
   * @param args the command line arguments
@@ -23,10 +29,17 @@ public class RPSFrontEnd
  public static void main(String[] args)
    {boolean commandline=false;
        for(int i=0;i<args.length;i++)
-           {if(args[i].equalsIgnoreCase("-c"))
+           {if(args[i].equalsIgnoreCase("-c")) //c for command line
              {commandline=true;
               break;}
            }
+       for(String s : args)
+         {if(s.equalsIgnoreCase("-s")) //s for solomon (server battles)
+           {solomon=true;
+            break;
+           }
+          
+         }
        if(!commandline)
          {
              
@@ -77,7 +90,7 @@ public class RPSFrontEnd
        
        /**
         * It should be noted that currently the -c option is the only way to 
-        *    start in commmand-line mode, and if it is not found all other
+        *    start in command-line mode, and if it is not found all other
         *    arguments will be ignored (and the gui should start).
         * 
        */
@@ -136,8 +149,12 @@ public class RPSFrontEnd
        }
        else// if (index==1)
        {
-           throwCount=Integer.decode(args[index-1]).intValue();
-           aiType=Integer.decode(args[index]).intValue();
+           try{throwCount=Integer.decode(args[0]).intValue();}
+           catch(NumberFormatException e)
+             {throwCount=0;}
+           try{aiType=Integer.decode(args[index]).intValue();}
+           catch(NumberFormatException e)
+             {aiType=-1;}
            if(throwCount<=0)
            {
                printString("Invalid throw count. Set to default, "
@@ -164,6 +181,10 @@ public class RPSFrontEnd
            }
        }    
        **/
+       
+       if(solomon)
+         {RemotePlayer.getInstance().register( "Team Kai", null );}
+
        printString("   ROCK - PAPER - SCISSORS   \n");
        printString("         Team KAI            \n");
        int command=-1;
@@ -173,7 +194,8 @@ public class RPSFrontEnd
            printString("Enter 1 or 'match' to start a match\n");
            printString("Enter 2 or 'help' display help\n");
            printString("Enter 3 or 'score' to display score\n");
-           printString("Enter 4 or 'quit' to quit the game\n");
+           printString("Enter 4 for more options\n");
+           printString("Enter 5 or 'quit' to quit the game\n");
            printString("Enter your choice: ");
            command = parceMenuCommand(in.nextLine());
        }
@@ -186,36 +208,53 @@ public class RPSFrontEnd
  private static void startMatch()
  {
      int winner;
+     
+     if(solomon)
+       {RemotePlayer.getInstance().startMatch( throwCount );}
+     
      current=new Match(throwCount);
      while(!current.matchIsOver())
      {
          String results="";
+         
+         //CPU's turn
+         int p2Throw=player2.getThrows();
+         if(solomon)
+           {
+            RemotePlayer.getInstance().doGesture(intToGesture(p2Throw));
+           }
+
+         //Player's turn
          int p1Throw = -1;
-         while(p1Throw==-1)
-         {               
-             printString("Enter your throw: ");
-             p1Throw =player1.getThrows();
-             if(p1Throw==-1)
-             {
-                 printString("Invalid command. Please enter rock, paper,"
-                                +" or scissors.\n");
-             }
-             if(p1Throw==3)
-             {
-                 displayHelp();
-                 p1Throw = -1;
-             }
-             if(p1Throw==4)
-             {
-                 displayScore();
-                 p1Throw = -1;
-             }
-             if(p1Throw==5)
-             {
-                 printString("Goodbye!\n");
-                 System.exit(0);
-             }
-         }
+         if(solomon)
+           {Scorecard score = RemotePlayer.getInstance().getScore();
+            Gesture gesture=score.myGesture;
+            p1Throw=gestureToInt(gesture);
+           }
+         else
+           {while(p1Throw==-1)
+              {printString("Enter your throw: ");
+               p1Throw =player1.getThrows();
+               if(p1Throw==-1)
+                 {printString("Invalid command. Please enter rock, paper,"
+                                 +" or scissors.\n");
+                 }
+               if(p1Throw==3)
+                 {displayHelp();
+                  p1Throw = -1;
+                 }
+               if(p1Throw==4)
+                 {displayScore();
+                  p1Throw = -1;
+               }
+               if(p1Throw==5)
+                 {printString("Goodbye!\n");
+                  System.exit(0);
+                 }
+              }
+           }
+         
+         //Print results
          printString("You chose ");
          switch (p1Throw)
          {
@@ -228,13 +267,27 @@ public class RPSFrontEnd
              case 2: printString("Scissors\n");
                 results=results+"s";
                 break;
+             default: printString("This should be impossible.\n");
+                results=results+"?";
+         }
+         printString("The computer chose ");
+         switch (p2Throw)
+         {
+             case 0: printString("Rock\n");
+                results=results+"R";
+                break;
+             case 1: printString("Paper\n");
+                results=results+"P";
+                break;
+             case 2: printString("Scissors\n");
+                results=results+"S";
+                break;
              default: printString("This should be impossibble.\n");
                 results=results+"?";
          }
-
-         int p2Throw=player2.getThrows();
-       
-       // This code is for 2 players
+         
+         
+       // This code is for 2 players, in place of the call to player2.getThrows()
        /*while(p2Throw==-1)
          {printString("Enter your throw: ");
           p2Throw=parser.parceCommand(getCommand());
@@ -254,24 +307,9 @@ public class RPSFrontEnd
           if(p2Throw==5)
               System.exit(0);
          }*/
-       
-       
-         printString("The computer chose ");
-         switch (p2Throw)
-         {
-             case 0: printString("Rock\n");
-                results=results+"R";
-                break;
-             case 1: printString("Paper\n");
-                results=results+"P";
-                break;
-             case 2: printString("Scissors\n");
-                results=results+"S";
-                break;
-             default: printString("This should be impossibble.\n");
-                results=results+"?";
-         }
-
+         
+         
+         //print the winner
          winner=current.checkRound(p1Throw, p2Throw);
          if(winner==0)//tie
          {
@@ -293,7 +331,9 @@ public class RPSFrontEnd
          }
          else
          {
-             printString("Something went horribly wrong.");}
+             printString("Something went horribly wrong.");
+             System.exit(1);
+         }
        
          player1.setMatchRec(results); //This may be an issue when trying to put
          player2.setMatchRec(results);  //two cpu's against each other, since 
@@ -352,7 +392,25 @@ public class RPSFrontEnd
           displayScore();
           return -1;
       }
-    if(parceMe.equals("4")|| parceMe.equalsIgnoreCase("quit"))
+    if(parceMe.equals("4"))
+      {
+          while(true)
+            {printString("Enter ai level - random or smart: ");
+             boolean temp=setAiType(in.nextLine());
+             if(temp)
+               {break;}
+             printString("Invalid AI type.\n");
+            } 
+          while(true)
+            {printString("Enter the throw count: ");
+             boolean temp=setThrowCount(in.nextLine());
+             if(temp)
+               {break;}
+             printString("Invalid value. Enter a positive, nonzero integer value.\n");
+            }
+       return -1;
+      }
+    if(parceMe.equals("5")|| parceMe.equalsIgnoreCase("quit"))
       {
           printString("Thanks for playing! Goodbye!\n\n");
           System.exit(0);
@@ -452,4 +510,58 @@ public class RPSFrontEnd
          temp += t.poll();
      }
  }
+ 
+ static private boolean setAiType(String s)
+   {
+    boolean success=false;
+    if(s.equalsIgnoreCase("RANDOM"))
+      {
+       ((ComputerPlayer) player2).setAI(0);
+       success=true;
+      }
+    if(s.equalsIgnoreCase("SMART"))
+      {((ComputerPlayer) player2).setAI(0);
+       success=true;
+      }
+    return success;
+   }
+ 
+ static private boolean setThrowCount(String s)
+   {boolean success=false;
+    int number;
+    try{number=Integer.parseInt(s);}
+    catch(Exception e)
+      {number=0;}
+    if (number>0)
+      {throwCount=number;
+       success=true;
+      }
+    return success;
+   }
+ 
+ private static int gestureToInt(Gesture g)
+   {
+    if(g.name().equals("ROCK"))
+      {return 0;
+      }
+    else if(g.name().equals("PAPER"))
+      {return 1;
+      }
+    else if(g.name().equals("SCISSORS"))
+      {return 2;
+      }
+    else
+      {return -1;
+      }
+   }
+ 
+ private static Gesture intToGesture(int i)
+   {switch(i)
+     {case 0:return Gesture.ROCK;
+      case 1:return Gesture.PAPER;
+      case 2:return Gesture.SCISSORS;
+      
+      default: return Gesture.NONE;
+     }
+   }
 }
