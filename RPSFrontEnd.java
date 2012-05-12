@@ -228,7 +228,7 @@ public class RPSFrontEnd
          int p1Throw = -1;
          if(solomon)
            {Scorecard score = RemotePlayer.getInstance().getScore();
-            Gesture gesture=score.myGesture;
+            Gesture gesture=score.opponentGesture;
             p1Throw=gestureToInt(gesture);
            }
          else
@@ -282,7 +282,7 @@ public class RPSFrontEnd
              case 2: printString("Scissors\n");
                 results=results+"S";
                 break;
-             default: printString("This should be impossibble.\n");
+             default: printString("This should be impossible.\n");
                 results=results+"?";
          }
          
@@ -339,8 +339,8 @@ public class RPSFrontEnd
          player2.setMatchRec(results);  //two cpu's against each other, since 
              //the order of throws matters (p1's comes after p2's currently).
      }
-     displayScore();
      current=null;
+     displayScore();
    }
 
 
